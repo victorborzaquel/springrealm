@@ -4,8 +4,10 @@ import com.victorborzaquel.springrealm.exceptions.base.NotFoundException;
 
 public class ClassNotFoundException extends NotFoundException {
 
+  private static String reason = "Class not found";
+
   public ClassNotFoundException() {
-    super("Class not found");
+    super(reason);
   }
 
 }
