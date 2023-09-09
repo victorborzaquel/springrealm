@@ -20,7 +20,7 @@ public class AppException extends RuntimeException {
   public AppException(List<String> errors, HttpStatus httpStatus, String reason) {
     HttpStatus defaultHttpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 
-    this.errors = new ArrayList<>(errors);
+    this.errors = errors != null ? new ArrayList<>(errors) : new ArrayList<>();
     this.appMessage = reason != null ? reason : "Error in the application";
     this.httpStatus = httpStatus != null ? httpStatus : defaultHttpStatus;
     this.reason = httpStatus != null ? httpStatus.getReasonPhrase() : defaultHttpStatus.getReasonPhrase();
