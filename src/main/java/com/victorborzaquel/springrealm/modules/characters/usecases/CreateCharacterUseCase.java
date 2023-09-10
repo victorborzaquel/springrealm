@@ -36,6 +36,10 @@ public class CreateCharacterUseCase {
       errors.add("name already exists");
     }
 
+    if (characterRepository.existsBySlug(dto.getSlug())) {
+      errors.add("slug already exists");
+    }
+
     if (!errors.isEmpty()) {
       throw new CharacterAlreadyExistsException(errors);
     }
