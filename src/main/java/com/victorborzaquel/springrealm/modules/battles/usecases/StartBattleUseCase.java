@@ -27,6 +27,10 @@ public class StartBattleUseCase {
   private final EnemyRepository enemyRepository;
   private final PlayerRepository playerRepository;
 
+  private Boolean isPlayerStartBattle = null;
+  private RollDicesDto playerRollDices = null;
+  private RollDicesDto enemyRollDices = null;
+
   public ResponseStartBattleDto execute(StartBattleDto dto) {
     Enemy enemy = enemyRepository.findBySlugIgnoreCase(dto.getEnemySlug()).orElseThrow(EnemyNotFoundException::new);
     Player player = playerRepository.findByUsernameIgnoreCase(dto.getPlayerUsername())
@@ -36,11 +40,16 @@ public class StartBattleUseCase {
       throw new PlayerAlreadyInBattleException();
     }
 
-    // START BATTLE
-    Boolean isPlayerStartBattle = null;
-    RollDicesDto playerRollDices = null;
-    RollDicesDto enemyRollDices = null;
+    rollDices();
 
+    Battle battle = BattleMapper.INSTANCE.toEntity(enemy, player, isPlayerStartBattle);
+
+    battleRepository.save(battle);
+
+    return BattleMapper.INSTANCE.toDto(battle, playerRollDices, enemyRollDices);
+  }
+
+  private void rollDices() {
     while (isPlayerStartBattle == null) {
       playerRollDices = DiceUtil.rollInitiativeDice();
       enemyRollDices = DiceUtil.rollInitiativeDice();
@@ -51,12 +60,5 @@ public class StartBattleUseCase {
 
       isPlayerStartBattle = playerRollDices.getResult() > enemyRollDices.getResult();
     }
-
-    Battle battle = BattleMapper.INSTANCE.toEntity(enemy, player, isPlayerStartBattle);
-
-    battleRepository.save(battle);
-
-    return BattleMapper.INSTANCE.toDto(battle, playerRollDices, enemyRollDices);
   }
-
 }
