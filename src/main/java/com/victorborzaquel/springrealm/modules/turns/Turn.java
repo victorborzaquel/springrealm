@@ -2,10 +2,13 @@ package com.victorborzaquel.springrealm.modules.turns;
 
 import java.util.UUID;
 
+import org.hibernate.Hibernate;
+
 import com.victorborzaquel.springrealm.modules.battles.Battle;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,9 +40,6 @@ public class Turn {
   @Column(name = "number", nullable = false)
   private Integer number;
 
-  @ManyToOne(optional = false)
-  private Battle battle;
-
   @Column(name = "is_player_turn", nullable = false)
   private Boolean isPlayerTurn;
 
@@ -57,5 +57,8 @@ public class Turn {
 
   @Column(name = "damage", nullable = false)
   private Integer damage;
+
+  @ManyToOne(optional = false)
+  private Battle battle;
 
 }
