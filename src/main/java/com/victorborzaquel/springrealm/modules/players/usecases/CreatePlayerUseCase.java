@@ -26,7 +26,7 @@ public class CreatePlayerUseCase {
   public ResponsePlayerDto execute(CreatePlayerDto dto) {
     validate(dto);
 
-    Character character = characterRepository.findByNameIgnoreCase(dto.getCharacterName())
+    Character character = characterRepository.findBySlugIgnoreCase(dto.getCharacterSlug())
         .orElseThrow(CharacterNotFoundException::new);
 
     Player player = PlayerMapper.INSTANCE.toEntity(dto, character);

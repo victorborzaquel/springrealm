@@ -13,15 +13,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UpdatePlayerDto {
   @NotEmpty(message = "First name is required")
+  @Pattern(regexp = "^[a-zA-Z ]*$", message = "First name must be alphanumeric")
   private String firstName;
 
-  @NotEmpty(message = "Last name is required")
+  @Pattern(regexp = "^[a-zA-Z ]*$", message = "Last name must be alphanumeric")
   private String lastName;
 
   @NotEmpty(message = "Username is required")
   @Pattern(regexp = "^[a-zA-Z0-9]*$", message = "Username must be alphanumeric")
   private String username;
 
-  @NotEmpty(message = "Character name is required")
-  private String characterName;
+  @NotEmpty(message = "Character slug is required")
+  private String characterSlug;
 }

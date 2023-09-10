@@ -29,7 +29,7 @@ public class UpdatePlayerUseCase {
     playerRepository.findById(id).orElseThrow(PlayerNotFoundException::new);
     validate(id, dto);
 
-    Character character = characterRepository.findByNameIgnoreCase(dto.getCharacterName())
+    Character character = characterRepository.findBySlugIgnoreCase(dto.getCharacterSlug())
         .orElseThrow(CharacterNotFoundException::new);
 
     Player player = PlayerMapper.INSTANCE.toEntity(id, dto, character);

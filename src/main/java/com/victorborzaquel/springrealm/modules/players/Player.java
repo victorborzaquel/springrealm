@@ -5,7 +5,9 @@ import java.util.UUID;
 
 import com.victorborzaquel.springrealm.modules.battles.Battle;
 import com.victorborzaquel.springrealm.modules.characters.Character;
+import com.victorborzaquel.springrealm.utils.NameUtil;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,7 +40,7 @@ public class Player {
   @Column(name = "first_name", nullable = false)
   private String firstName;
 
-  @Column(name = "last_name", nullable = false)
+  @Column(name = "last_name")
   private String lastName;
 
   @Column(name = "username", nullable = false, unique = true)
@@ -47,10 +49,10 @@ public class Player {
   @ManyToOne(optional = false)
   private Character character;
 
-  @OneToMany(mappedBy = "player")
+  @OneToMany(mappedBy = "player", cascade = CascadeType.REMOVE)
   private List<Battle> battles;
 
   public String getName() {
-    return String.format("%s %s", this.firstName, this.lastName);
+    return NameUtil.getFullName(this.firstName, this.lastName);
   }
 }
