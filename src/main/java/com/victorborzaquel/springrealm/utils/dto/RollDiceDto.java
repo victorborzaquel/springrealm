@@ -1,4 +1,4 @@
-package com.victorborzaquel.springrealm.utils.dices.dto;
+package com.victorborzaquel.springrealm.utils.dto;
 
 import java.util.List;
 
@@ -6,13 +6,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RollDicesDto {
+@ToString
+public class RollDiceDto {
+  private String name;
   private Integer result;
-  private String dice;
   private List<Integer> moves;
 }
