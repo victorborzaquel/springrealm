@@ -36,7 +36,7 @@ public class StartBattleUseCase {
     Player player = playerRepository.findByUsernameIgnoreCase(dto.getPlayerUsername())
         .orElseThrow(PlayerNotFoundException::new);
 
-    if (battleRepository.existsByPlayerAndInProgressTrue(player)) {
+    if (battleRepository.existsByPlayerAndEndedAtNull(player)) {
       throw new PlayerAlreadyInBattleException();
     }
 

@@ -1,7 +1,10 @@
 package com.victorborzaquel.springrealm.modules.battles;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.victorborzaquel.springrealm.modules.battlecharacters.BattleCharacter;
 import com.victorborzaquel.springrealm.modules.enemies.Enemy;
@@ -37,6 +40,13 @@ public class Battle {
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
+  @Column(name = "created_at", nullable = false)
+  @CreationTimestamp
+  private LocalDateTime createdAt;
+
+  @Column(name = "ended_at", nullable = true)
+  private LocalDateTime endedAt;
+
   @ManyToOne(optional = false)
   private Player player;
 
@@ -45,10 +55,6 @@ public class Battle {
 
   @Column(name = "is_player_initiative", nullable = false)
   private Boolean isPlayerInitiative;
-
-  @Column(name = "in_progress", nullable = false)
-  @Builder.Default
-  private Boolean inProgress = true;
 
   @ManyToOne(optional = false, cascade = CascadeType.ALL)
   private BattleCharacter playerBattleCharacter;
@@ -60,11 +66,15 @@ public class Battle {
   private List<Turn> turns;
 
   public void endBattle() {
-    inProgress = false;
+    endedAt = LocalDateTime.now();
+  }
+
+  public Boolean getIsInProgress() {
+    return endedAt == null;
   }
 
   public Boolean getIsPlayerWinner() {
-    if (inProgress) {
+    if (getIsInProgress()) {
       return null;
     }
 

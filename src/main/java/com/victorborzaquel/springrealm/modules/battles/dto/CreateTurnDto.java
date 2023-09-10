@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateTurnDto {
-
   private Integer number;
   private Boolean isPlayerTurn;
   private Integer playerPV;
@@ -20,7 +19,5 @@ public class CreateTurnDto {
   private Integer attackDice;
   private Integer defenseDice;
   private Integer damage;
-
   private UUID battleId;
-  
 }

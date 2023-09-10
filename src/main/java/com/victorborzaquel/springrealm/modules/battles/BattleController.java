@@ -1,5 +1,6 @@
 package com.victorborzaquel.springrealm.modules.battles;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,5 +31,10 @@ public class BattleController {
   @PostMapping("attack")
   public ResponseAttackBattleDto attack(@Valid @RequestBody AttackBattleDto dto) {
     return attackBattleUseCase.execute(dto);
+  }
+
+  @GetMapping("history")
+  public String history() {
+    return "history";
   }
 }

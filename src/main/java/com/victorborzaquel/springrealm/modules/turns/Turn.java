@@ -1,6 +1,9 @@
 package com.victorborzaquel.springrealm.modules.turns;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.victorborzaquel.springrealm.modules.battles.Battle;
 
@@ -31,6 +34,10 @@ public class Turn {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
+
+  @Column(name = "created_at", nullable = false)
+  @CreationTimestamp
+  private LocalDateTime createdAt;
 
   @Column(name = "number", nullable = false)
   private Integer number;

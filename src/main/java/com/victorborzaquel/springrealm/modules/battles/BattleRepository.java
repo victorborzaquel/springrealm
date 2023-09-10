@@ -7,13 +7,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.victorborzaquel.springrealm.modules.battles.Battle;
 import com.victorborzaquel.springrealm.modules.players.Player;
 
 public interface BattleRepository extends JpaRepository<Battle, UUID> {
   Page<Battle> findAllByPlayer(Pageable pageable, Player player);
 
-  Boolean existsByPlayerAndInProgressTrue(Player player);
+  Boolean existsByPlayerAndEndedAtNull(Player player);
 
-  Optional<Battle> findByPlayerAndInProgressTrue(Player player);
+  Optional<Battle> findByPlayerAndEndedAtNull(Player player);
 }

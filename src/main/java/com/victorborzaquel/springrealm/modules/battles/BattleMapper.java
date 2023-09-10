@@ -54,7 +54,8 @@ public interface BattleMapper {
 
   @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
   @Mapping(target = "turns", ignore = true)
-  @Mapping(target = "inProgress", ignore = true)
+  @Mapping(target = "createdAt", ignore = true)
+  @Mapping(target = "endedAt", ignore = true)
   @Mapping(target = "playerBattleCharacter", source = "player.character")
   @Mapping(target = "enemyBattleCharacter", source = "enemy.character")
   @Mapping(target = "enemy", source = "enemy")

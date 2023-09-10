@@ -34,7 +34,7 @@ public class AttackBattleUseCase {
     Player player = playerRepository.findByUsernameIgnoreCase(dto.getPlayerUsername())
         .orElseThrow(PlayerNotFoundException::new);
 
-    Battle battle = battleRepository.findByPlayerAndInProgressTrue(player)
+    Battle battle = battleRepository.findByPlayerAndEndedAtNull(player)
         .orElseThrow(PlayerNotAlreadyInBattleException::new);
 
     ResponseAttackTurnDto responseAttackTurnDto = executeBattle(battle);
@@ -53,7 +53,7 @@ public class AttackBattleUseCase {
     ResponseTurnDto initiativeTurn = turn(battle, characterAttack, characterDefense);
     ResponseTurnDto secondaryTurn = null;
 
-    if (battle.getInProgress()) {
+    if (battle.getIsInProgress()) {
       secondaryTurn = turn(battle, characterDefense, characterAttack);
     }
 
