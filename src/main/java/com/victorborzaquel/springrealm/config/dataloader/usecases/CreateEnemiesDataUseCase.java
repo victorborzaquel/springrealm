@@ -2,8 +2,6 @@ package com.victorborzaquel.springrealm.config.dataloader.usecases;
 
 import org.springframework.stereotype.Component;
 
-import com.victorborzaquel.springrealm.modules.characters.CharacterType;
-import com.victorborzaquel.springrealm.modules.characters.dto.CreateCharacterDto;
 import com.victorborzaquel.springrealm.modules.enemies.dto.CreateEnemyDto;
 import com.victorborzaquel.springrealm.modules.enemies.usecases.CreateEnemyUseCase;
 
@@ -23,8 +21,9 @@ public class CreateEnemiesDataUseCase {
 
   private void orc() {
     CreateEnemyDto dto = CreateEnemyDto.builder()
-        .name("Grugor Skullcrusher")
-        .characterName("orc")
+        .firstName("Grugor ")
+        .lastName("Skullcrusher")
+        .characterSlug("orc")
         .slug("grugorskullcrusher")
         .build();
 
@@ -33,8 +32,9 @@ public class CreateEnemiesDataUseCase {
 
   private void giant() {
     CreateEnemyDto dto = CreateEnemyDto.builder()
-        .name("Thundar Rockcrusher")
-        .characterName("giant")
+        .firstName("Thundar")
+        .lastName("Rockcrusher")
+        .characterSlug("giant")
         .slug("thundarrockcrusher")
         .build();
 
@@ -43,9 +43,10 @@ public class CreateEnemiesDataUseCase {
 
   private void werewolf() {
     CreateEnemyDto dto = CreateEnemyDto.builder()
-        .name("Fenrir Bloodmoon")
         .slug("fenrirbloodmoon")
-        .characterName("werewolf")
+        .firstName("Fenrir")
+        .lastName("Bloodmoon")
+        .characterSlug("werewolf")
         .build();
 
     createEnemyUseCase.execute(dto);

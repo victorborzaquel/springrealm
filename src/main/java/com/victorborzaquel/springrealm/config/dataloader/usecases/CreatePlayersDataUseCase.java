@@ -23,7 +23,7 @@ public class CreatePlayersDataUseCase {
 
   private void warrior() {
     CreatePlayerDto dto = CreatePlayerDto.builder()
-        .characterName("warrior")
+        .characterSlug("warrior")
         .firstName("Victor")
         .lastName("Borzaquel")
         .username("victorborzaquel")
