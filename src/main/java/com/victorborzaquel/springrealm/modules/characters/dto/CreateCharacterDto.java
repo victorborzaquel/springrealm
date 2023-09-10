@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateCharacterDto {
-
   @NotEmpty(message = "Name is required")
   private String name;
 
@@ -41,5 +40,4 @@ public class CreateCharacterDto {
 
   @NotNull(message = "Quantity faces is required")
   private Integer quantityFaces;
-
 }

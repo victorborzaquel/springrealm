@@ -33,8 +33,7 @@ public interface CharacterMapper {
   @Mapping(target = "players", ignore = true)
   Character toEntity(CreateCharacterDto dto);
 
-  @Mapping(target = "type", ignore = true)
   @Mapping(target = "enemies", ignore = true)
   @Mapping(target = "players", ignore = true)
-  Character toEntity(UUID id, UpdateCharacterDto dto);
+  Character toEntity(UUID id, UpdateCharacterDto dto, CharacterType type);
 }

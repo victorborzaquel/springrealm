@@ -3,8 +3,11 @@ package com.victorborzaquel.springrealm.modules.characters;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.Hibernate;
+
 import com.victorborzaquel.springrealm.modules.enemies.Enemy;
 import com.victorborzaquel.springrealm.modules.players.Player;
+import com.victorborzaquel.springrealm.utils.DiceUtil;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -71,6 +74,6 @@ public class Character {
   private List<Enemy> enemies;
   
   public String getDice() {
-    return String.format("%dd%d", this.quantityDices, this.quantityFaces);
+    return DiceUtil.getDiceName(quantityDices, quantityFaces);
   }
 }

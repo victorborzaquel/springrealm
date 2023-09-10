@@ -5,7 +5,6 @@ import java.util.List;
 import com.victorborzaquel.springrealm.exceptions.base.AlreadyExistsException;
 
 public class CharacterAlreadyExistsException extends AlreadyExistsException {
-
   private static String reason = "Character already exists";
 
   public CharacterAlreadyExistsException() {

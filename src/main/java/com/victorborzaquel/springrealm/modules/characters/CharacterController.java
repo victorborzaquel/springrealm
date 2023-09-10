@@ -6,8 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,18 +13,17 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.victorborzaquel.springrealm.modules.characters.dto.CreateCharacterDto;
 import com.victorborzaquel.springrealm.modules.characters.dto.ResponseCharacterDto;
 import com.victorborzaquel.springrealm.modules.characters.dto.UpdateCharacterDto;
 import com.victorborzaquel.springrealm.modules.characters.usecases.CreateCharacterUseCase;
-import com.victorborzaquel.springrealm.modules.characters.usecases.DeleteCharacterUseCase;
 import com.victorborzaquel.springrealm.modules.characters.usecases.FindAllCharactersByTypeUseCase;
 import com.victorborzaquel.springrealm.modules.characters.usecases.FindAllCharactersUseCase;
 import com.victorborzaquel.springrealm.modules.characters.usecases.FindOneCharacterBySlugUseCase;
 import com.victorborzaquel.springrealm.modules.characters.usecases.FindOneCharacterUseCase;
+import com.victorborzaquel.springrealm.modules.characters.usecases.UpdateCharacterBySlugUseCase;
 import com.victorborzaquel.springrealm.modules.characters.usecases.UpdateCharacterUseCase;
 
 import jakarta.validation.Valid;
@@ -36,17 +33,22 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/characters")
 public class CharacterController {
-  private final FindAllCharactersByTypeUseCase findAllClassesByTypeUseCase;
-  private final FindAllCharactersUseCase findAllClassesUseCase;
-  private final CreateCharacterUseCase createClassUseCase;
-  private final UpdateCharacterUseCase updateClassUseCase;
-  private final FindOneCharacterUseCase findOneClassUseCase;
+  private final FindAllCharactersByTypeUseCase findAllCharactersByTypeUseCase;
+  private final FindAllCharactersUseCase findAllCharactersUseCase;
+  private final CreateCharacterUseCase createCharacterUseCase;
+  private final UpdateCharacterUseCase updateCharacterUseCase;
+  private final UpdateCharacterBySlugUseCase updateCharacterBySlugUseCase;
+  private final FindOneCharacterUseCase findOneCharacterUseCase;
   private final FindOneCharacterBySlugUseCase findOneCharacterBySlugUseCase;
-  private final DeleteCharacterUseCase deleteClassUseCase;
+
+  @PostMapping
+  public ResponseCharacterDto create(@Valid @RequestBody CreateCharacterDto dto) {
+    return createCharacterUseCase.execute(dto);
+  }
 
   @GetMapping("{id}")
   public ResponseCharacterDto findOne(@PathVariable UUID id) {
-    return findOneClassUseCase.execute(id);
+    return findOneCharacterUseCase.execute(id);
   }
 
   @GetMapping("slug/{slug}")
@@ -62,7 +64,7 @@ public class CharacterController {
       @RequestParam(defaultValue = "ASC") Sort.Direction direction) {
     Pageable pageable = PageRequest.of(page, size, direction, sort);
 
-    return findAllClassesUseCase.execute(pageable);
+    return findAllCharactersUseCase.execute(pageable);
   }
 
   @GetMapping("type")
@@ -74,23 +76,16 @@ public class CharacterController {
       @RequestParam CharacterType type) {
     Pageable pageable = PageRequest.of(page, size, direction, sort);
 
-    return findAllClassesByTypeUseCase.execute(pageable, type);
-  }
-
-  @PostMapping
-  public ResponseCharacterDto create(@Valid @RequestBody CreateCharacterDto dto) {
-    return createClassUseCase.execute(dto);
+    return findAllCharactersByTypeUseCase.execute(pageable, type);
   }
 
   @PutMapping("{id}")
   public ResponseCharacterDto update(@PathVariable UUID id, @Valid @RequestBody UpdateCharacterDto dto) {
-    return updateClassUseCase.execute(id, dto);
+    return updateCharacterUseCase.execute(id, dto);
   }
 
-  @DeleteMapping("{id}")
-  @ResponseStatus(code = HttpStatus.NO_CONTENT)
-  public void delete(@PathVariable UUID id) {
-    deleteClassUseCase.execute(id);
+  @PutMapping("slug/{slug}")
+  public ResponseCharacterDto updateBySlug(@PathVariable String slug, @Valid @RequestBody UpdateCharacterDto dto) {
+    return updateCharacterBySlugUseCase.execute(slug, dto);
   }
-
 }

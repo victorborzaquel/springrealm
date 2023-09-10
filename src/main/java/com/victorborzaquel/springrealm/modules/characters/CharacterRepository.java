@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CharacterRepository extends JpaRepository<Character, UUID> {
-
   Page<Character> findAllByType(Pageable pageable, CharacterType type);
 
   boolean existsByName(String name);
@@ -22,5 +21,4 @@ public interface CharacterRepository extends JpaRepository<Character, UUID> {
   boolean existsBySlugIgnoreCaseAndIdNot(String slug, UUID id);
 
   Optional<Character> findBySlugIgnoreCase(String slug);
-
 }

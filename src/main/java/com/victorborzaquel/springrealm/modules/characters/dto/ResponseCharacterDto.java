@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResponseCharacterDto  {
-
   private String name;
   private String slug;
   private Integer life;
@@ -24,5 +23,4 @@ public class ResponseCharacterDto  {
   private Integer defense;
   private String dice;
   private CharacterType type;
-
 }
