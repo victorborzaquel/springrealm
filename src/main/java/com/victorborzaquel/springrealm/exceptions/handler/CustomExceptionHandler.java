@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,6 +26,15 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
   @ExceptionHandler(AppException.class)
   public ResponseEntity<ResponseExceptionDTO> handleException(AppException e) {
     return new ResponseEntity<>(ExceptionMapper.INSTANCE.toResponse(e), new HttpHeaders(), e.getHttpStatus());
+  }
+
+  @ExceptionHandler(HttpMessageConversionException.class)
+  public ResponseEntity<ResponseExceptionDTO> handleHttpMessageConversionException(HttpMessageConversionException ex) {
+    String errorMessage = "Erro na conversão do JSON: " + ex.getMessage();
+    HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+    AppException appException = new AppException(httpStatus, errorMessage);
+
+    return new ResponseEntity<>(ExceptionMapper.INSTANCE.toResponse(appException), new HttpHeaders(), httpStatus);
   }
 
   @Override
