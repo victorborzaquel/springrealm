@@ -29,8 +29,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-@Entity(name = "classes")
-@Table(name = "classes")
+@Entity(name = "characters")
+@Table(name = "characters")
 public class Character {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
