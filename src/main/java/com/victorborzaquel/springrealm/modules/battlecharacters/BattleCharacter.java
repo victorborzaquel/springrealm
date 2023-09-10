@@ -43,8 +43,8 @@ public class BattleCharacter {
   @Column(name = "name", nullable = false)
   private String name;
 
-  @Column(name = "life", nullable = false)
-  private Integer life;
+  @Column(name = "pv", nullable = false)
+  private Integer pv;
 
   @Column(name = "strength", nullable = false)
   private Integer strength;
@@ -68,7 +68,7 @@ public class BattleCharacter {
   private List<Battle> enemyBattles;
 
   public void damage(Integer damage) {
-    life = Math.max(0, life - damage);
+    pv = Math.max(0, pv - damage);
   }
 
   public String getDice() {
@@ -76,10 +76,10 @@ public class BattleCharacter {
   }
 
   public Boolean isAlive() {
-    return life > 0;
+    return pv > 0;
   }
 
   public Boolean isDead() {
-    return life <= 0;
+    return pv <= 0;
   }
 }
