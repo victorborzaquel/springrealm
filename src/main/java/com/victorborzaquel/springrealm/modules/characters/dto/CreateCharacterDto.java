@@ -1,17 +1,28 @@
-package com.victorborzaquel.springrealm.modules.classes.dto;
+package com.victorborzaquel.springrealm.modules.characters.dto;
+
+import com.victorborzaquel.springrealm.modules.characters.CharacterType;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Data
-public class CreateClassDto {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class CreateCharacterDto {
+
   @NotEmpty(message = "Name is required")
   private String name;
+
+  @NotEmpty(message = "Slug is required")
+  private String slug;
+
+  @NotNull(message = "Type is required")
+  private CharacterType type;
 
   @NotNull(message = "Life is required")
   private Integer life;
@@ -30,4 +41,5 @@ public class CreateClassDto {
 
   @NotNull(message = "Quantity faces is required")
   private Integer quantityFaces;
+
 }

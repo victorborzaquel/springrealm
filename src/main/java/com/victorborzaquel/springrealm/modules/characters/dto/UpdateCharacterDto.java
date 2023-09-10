@@ -1,13 +1,24 @@
-package com.victorborzaquel.springrealm.modules.classes.dto;
+package com.victorborzaquel.springrealm.modules.characters.dto;
+
+import java.io.Serializable;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class UpdateClassDto {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class UpdateCharacterDto {
   @NotEmpty(message = "Name is required")
   private String name;
+
+  @NotEmpty(message = "Slug is required")
+  private String slug;
 
   @NotNull(message = "Life is required")
   private Integer life;
