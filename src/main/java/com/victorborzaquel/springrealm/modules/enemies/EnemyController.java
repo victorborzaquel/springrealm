@@ -22,6 +22,7 @@ import com.victorborzaquel.springrealm.modules.enemies.usecases.CreateEnemyUseCa
 import com.victorborzaquel.springrealm.modules.enemies.usecases.FindAllEnemiesUseCase;
 import com.victorborzaquel.springrealm.modules.enemies.usecases.FindOneEnemyBySlugUseCase;
 import com.victorborzaquel.springrealm.modules.enemies.usecases.FindOneEnemyUseCase;
+import com.victorborzaquel.springrealm.modules.enemies.usecases.UpdateEnemyBySlugUseCase;
 import com.victorborzaquel.springrealm.modules.enemies.usecases.UpdateEnemyUseCase;
 
 import jakarta.validation.Valid;
@@ -31,11 +32,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/enemies")
 public class EnemyController {
+  private final CreateEnemyUseCase createEnemyUseCase;
   private final FindOneEnemyUseCase findOneEnemyUseCase;
   private final FindOneEnemyBySlugUseCase findOneEnemyBySlugUseCase;
   private final FindAllEnemiesUseCase findAllEnemiesUseCase;
-  private final CreateEnemyUseCase createEnemyUseCase;
   private final UpdateEnemyUseCase updateEnemyUseCase;
+  private final UpdateEnemyBySlugUseCase updateEnemyBySlugUseCase;
+
+  @PostMapping
+  public ResponseEnemyDto create(@Valid @RequestBody CreateEnemyDto dto) {
+    return createEnemyUseCase.execute(dto);
+  }
 
   @GetMapping("{id}")
   public ResponseEnemyDto findOne(@PathVariable UUID id) {
@@ -58,14 +65,13 @@ public class EnemyController {
     return findAllEnemiesUseCase.execute(pageable);
   }
 
-  @PostMapping
-  public ResponseEnemyDto create(@Valid @RequestBody CreateEnemyDto dto) {
-    return createEnemyUseCase.execute(dto);
-  }
-
   @PutMapping("{id}")
   public ResponseEnemyDto update(@PathVariable UUID id, @Valid @RequestBody UpdateEnemyDto dto) {
     return updateEnemyUseCase.execute(id, dto);
   }
 
+  @PutMapping("slug/{slug}")
+  public ResponseEnemyDto updateBySlug(@PathVariable String slug, @Valid @RequestBody UpdateEnemyDto dto) {
+    return updateEnemyBySlugUseCase.execute(slug, dto);
+  }
 }

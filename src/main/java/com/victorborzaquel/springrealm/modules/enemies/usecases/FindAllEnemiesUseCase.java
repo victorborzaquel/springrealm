@@ -17,8 +17,8 @@ public class FindAllEnemiesUseCase {
   private final EnemyRepository enemyRepository;
 
   public Page<ResponseEnemyDto> execute(Pageable pageable) {
-    Page<Enemy> characters = enemyRepository.findAll(pageable);
+    Page<Enemy> enemies = enemyRepository.findAll(pageable);
 
-    return EnemyMapper.INSTANCE.toDto(characters);
+    return EnemyMapper.INSTANCE.toDto(enemies);
   }
 }

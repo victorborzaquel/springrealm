@@ -31,13 +31,14 @@ public interface EnemyMapper {
 
   @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
   @Mapping(target = "battles", ignore = true)
-  @Mapping(target = "name", source = "dto.name")
   @Mapping(target = "slug", source = "dto.slug")
+  @Mapping(target = "character", source = "character")
+  @Mapping(target = "name", ignore = true)
   Enemy toEntity(CreateEnemyDto dto, Character character);
 
   @Mapping(target = "id", source = "id")
   @Mapping(target = "battles", ignore = true)
-  @Mapping(target = "name", source = "dto.name")
   @Mapping(target = "slug", source = "dto.slug")
+  @Mapping(target = "character", source = "character")
   Enemy toEntity(UUID id, UpdateEnemyDto dto, Character character);
 }

@@ -31,7 +31,7 @@ public class UpdateEnemyUseCase {
     enemyRepository.findById(id).orElseThrow(EnemyNotFoundException::new);
     validate(id, dto);
 
-    Character character = characterRepository.findByNameIgnoreCase(dto.getCharacterName())
+    Character character = characterRepository.findBySlugIgnoreCase(dto.getCharacterSlug())
         .orElseThrow(CharacterNotFoundException::new);
 
     validateCharacter(character);
@@ -51,10 +51,6 @@ public class UpdateEnemyUseCase {
 
   private void validate(UUID id, UpdateEnemyDto dto) {
     List<String> errors = new ArrayList<>();
-
-    if (enemyRepository.existsByNameAndIdNot(dto.getName(), id)) {
-      errors.add("name already exists");
-    }
 
     if (enemyRepository.existsBySlugAndIdNot(dto.getSlug(), id)) {
       errors.add("slug already exists");

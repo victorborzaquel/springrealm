@@ -12,9 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResponseEnemyDto {
-
   private String name;
   private String slug;
   private ResponseCharacterDto character;
-
 }
