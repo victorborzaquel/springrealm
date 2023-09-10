@@ -33,7 +33,6 @@ import lombok.Setter;
 @Entity(name = "battles")
 @Table(name = "battles")
 public class Battle {
-
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
@@ -57,10 +56,18 @@ public class Battle {
   @ManyToOne(optional = false, cascade = CascadeType.ALL)
   private BattleCharacter enemyBattleCharacter;
 
-  @OneToMany(mappedBy = "battle")
+  @OneToMany(mappedBy = "battle", cascade = CascadeType.REMOVE)
   private List<Turn> turns;
 
   public void endBattle() {
     inProgress = false;
+  }
+
+  public Boolean getIsPlayerWinner() {
+    if (inProgress) {
+      return null;
+    }
+
+    return playerBattleCharacter.getPv() > 0;
   }
 }

@@ -11,11 +11,9 @@ import com.victorborzaquel.springrealm.modules.battles.Battle;
 import com.victorborzaquel.springrealm.modules.players.Player;
 
 public interface BattleRepository extends JpaRepository<Battle, UUID> {
-
   Page<Battle> findAllByPlayer(Pageable pageable, Player player);
 
   Boolean existsByPlayerAndInProgressTrue(Player player);
 
   Optional<Battle> findByPlayerAndInProgressTrue(Player player);
-
 }

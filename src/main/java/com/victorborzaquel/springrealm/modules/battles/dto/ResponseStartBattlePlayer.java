@@ -1,5 +1,7 @@
 package com.victorborzaquel.springrealm.modules.battles.dto;
 
+import com.victorborzaquel.springrealm.utils.dto.RollDiceDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,11 +11,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseBattleCharacter {
+public class ResponseStartBattlePlayer {
   private String name;
-  private Integer pv;
-  private Integer strength;
-  private Integer agility;
-  private Integer defense;
-  private String dice;
+  private String username;
+  private ResponseBattleCharacter character;
+  private RollDiceDto initiativeDice;
 }

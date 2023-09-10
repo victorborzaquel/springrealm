@@ -11,11 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StartBattleDto {
-  
-  @NotEmpty(message = "Enemy slug is required")
-  private String enemySlug;
-
   @NotEmpty(message = "Player username is required")
   private String playerUsername;
-  
+
+  private String enemySlug;
 }

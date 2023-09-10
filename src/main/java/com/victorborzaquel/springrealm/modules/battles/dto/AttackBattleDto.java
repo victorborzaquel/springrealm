@@ -11,8 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AttackBattleDto {
-  
   @NotEmpty(message = "Player username is required")
   private String playerUsername;
-  
 }

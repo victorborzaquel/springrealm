@@ -1,54 +1,56 @@
 package com.victorborzaquel.springrealm.modules.battles;
 
-import java.util.List;
-
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import com.victorborzaquel.springrealm.modules.battlecharacters.BattleCharacter;
-import com.victorborzaquel.springrealm.modules.battles.dto.ResponseBattleDto;
-import com.victorborzaquel.springrealm.modules.battles.dto.ResponseBattleEntity;
+import com.victorborzaquel.springrealm.modules.battles.dto.ResponseAttackBattleDto;
+import com.victorborzaquel.springrealm.modules.battles.dto.ResponseAttackBattleEnemy;
+import com.victorborzaquel.springrealm.modules.battles.dto.ResponseAttackBattlePlayer;
+import com.victorborzaquel.springrealm.modules.battles.dto.ResponseAttackTurnDto;
 import com.victorborzaquel.springrealm.modules.battles.dto.ResponseStartBattleDto;
-import com.victorborzaquel.springrealm.modules.battles.dto.ResponseStartBattleEntity;
+import com.victorborzaquel.springrealm.modules.battles.dto.ResponseStartBattleEnemy;
+import com.victorborzaquel.springrealm.modules.battles.dto.ResponseStartBattlePlayer;
+import com.victorborzaquel.springrealm.modules.battles.dto.ResponseTurnDto;
 import com.victorborzaquel.springrealm.modules.characters.Character;
 import com.victorborzaquel.springrealm.modules.enemies.Enemy;
 import com.victorborzaquel.springrealm.modules.players.Player;
-import com.victorborzaquel.springrealm.modules.turns.Turn;
-import com.victorborzaquel.springrealm.modules.turns.dto.ResponseTurnDto;
-import com.victorborzaquel.springrealm.utils.dices.dto.RollDicesDto;
+import com.victorborzaquel.springrealm.utils.dto.RollDiceDto;
 
 @Mapper
 public interface BattleMapper {
   BattleMapper INSTANCE = Mappers.getMapper(BattleMapper.class);
 
-  @Mapping(target = "slug", source = "player.username")
-  ResponseBattleEntity toEntity(Player player);
+  // @Mapping(target = "slug", source = "player.username")
+  // ResponseAttackBattlePlayer toEntity(Player player);
 
-  ResponseBattleEntity toEntity(Enemy enemy);
-
-  @Mapping(target = "slug", source = "player.username")
-  @Mapping(target = "name", source = "battleCharacter.name")
-  @Mapping(target = "character", source = "battleCharacter")
-  ResponseBattleEntity toEntity(Player player, BattleCharacter battleCharacter);
+  // ResponseAttackBattleEnemy toEntity(Enemy enemy);
 
   @Mapping(target = "name", source = "battleCharacter.name")
   @Mapping(target = "character", source = "battleCharacter")
-  ResponseBattleEntity toEntity(Enemy enemy, BattleCharacter battleCharacter);
+  ResponseAttackBattlePlayer toResponseBattleEntity(Player player, BattleCharacter battleCharacter,
+      ResponseTurnDto turn);
 
-  @Mapping(target = "player", expression = "java(toEntity(battle.getPlayer(), battle.getPlayerBattleCharacter()))")
-  @Mapping(target = "enemy", expression = "java(toEntity(battle.getEnemy(), battle.getEnemyBattleCharacter()))")
-  @Mapping(target = "turns", source = "turns")
-  ResponseBattleDto toDto(Battle battle, List<Turn> turns);
+  @Mapping(target = "name", source = "battleCharacter.name")
+  @Mapping(target = "character", source = "battleCharacter")
+  ResponseAttackBattleEnemy toResponseBattleEntity(Enemy enemy, BattleCharacter battleCharacter, ResponseTurnDto turn);
 
-  @Mapping(target = "slug", source = "player.username")
-  ResponseStartBattleEntity toEntity(Player player, RollDicesDto rollDices);
+  @Mapping(target = "player", expression = "java(toResponseBattleEntity(battle.getPlayer(), battle.getPlayerBattleCharacter(), turn.getPlayer()))")
+  @Mapping(target = "enemy", expression = "java(toResponseBattleEntity(battle.getEnemy(), battle.getEnemyBattleCharacter(), turn.getEnemy()))")
+  ResponseAttackBattleDto toDto(Battle battle, ResponseAttackTurnDto turn);
 
-  ResponseStartBattleEntity toEntity(Enemy player, RollDicesDto rollDices);
+  @Mapping(target = "name", source = "player.name")
+  @Mapping(target = "character.pv", source = "player.character.life")
+  ResponseStartBattlePlayer toResponseStartBattleEntity(Player player, RollDiceDto initiativeDice);
 
-  @Mapping(target = "player", expression = "java(toEntity(battle.getPlayer(), playerRollDices))")
-  @Mapping(target = "enemy", expression = "java(toEntity(battle.getEnemy(), enemyRollDices))")
-  ResponseStartBattleDto toDto(Battle battle, RollDicesDto playerRollDices, RollDicesDto enemyRollDices);
+  @Mapping(target = "name", source = "enemy.name")
+  @Mapping(target = "character.pv", source = "enemy.character.life")
+  ResponseStartBattleEnemy toResponseStartBattleEntity(Enemy enemy, RollDiceDto initiativeDice);
+
+  @Mapping(target = "player", expression = "java(toResponseStartBattleEntity(battle.getPlayer(), playerRollDice))")
+  @Mapping(target = "enemy", expression = "java(toResponseStartBattleEntity(battle.getEnemy(), enemyRollDice))")
+  ResponseStartBattleDto toDto(Battle battle, RollDiceDto playerRollDice, RollDiceDto enemyRollDice);
 
   @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
   @Mapping(target = "turns", ignore = true)
@@ -61,7 +63,6 @@ public interface BattleMapper {
 
   @Mapping(target = "enemyBattles", ignore = true)
   @Mapping(target = "playerBattles", ignore = true)
+  @Mapping(target = "pv", source = "character.life")
   BattleCharacter toEntity(Character character);
-
-  ResponseTurnDto toDto(Turn turn);
 }

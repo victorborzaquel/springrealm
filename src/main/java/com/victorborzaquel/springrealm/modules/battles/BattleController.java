@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.victorborzaquel.springrealm.modules.battles.dto.AttackBattleDto;
-import com.victorborzaquel.springrealm.modules.battles.dto.ResponseBattleDto;
+import com.victorborzaquel.springrealm.modules.battles.dto.ResponseAttackBattleDto;
 import com.victorborzaquel.springrealm.modules.battles.dto.ResponseStartBattleDto;
 import com.victorborzaquel.springrealm.modules.battles.dto.StartBattleDto;
 import com.victorborzaquel.springrealm.modules.battles.usecases.AttackBattleUseCase;
@@ -28,8 +28,7 @@ public class BattleController {
   }
 
   @PostMapping("attack")
-  public ResponseBattleDto attack(@Valid @RequestBody AttackBattleDto dto) {
+  public ResponseAttackBattleDto attack(@Valid @RequestBody AttackBattleDto dto) {
     return attackBattleUseCase.execute(dto);
   }
-
 }

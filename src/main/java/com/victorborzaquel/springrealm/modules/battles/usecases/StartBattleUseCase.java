@@ -14,8 +14,8 @@ import com.victorborzaquel.springrealm.modules.enemies.exceptions.EnemyNotFoundE
 import com.victorborzaquel.springrealm.modules.players.Player;
 import com.victorborzaquel.springrealm.modules.players.PlayerRepository;
 import com.victorborzaquel.springrealm.modules.players.exceptions.PlayerNotFoundException;
-import com.victorborzaquel.springrealm.utils.dices.DiceUtil;
-import com.victorborzaquel.springrealm.utils.dices.dto.RollDicesDto;
+import com.victorborzaquel.springrealm.utils.DiceUtil;
+import com.victorborzaquel.springrealm.utils.dto.RollDiceDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,11 +28,11 @@ public class StartBattleUseCase {
   private final PlayerRepository playerRepository;
 
   private Boolean isPlayerStartBattle = null;
-  private RollDicesDto playerRollDices = null;
-  private RollDicesDto enemyRollDices = null;
+  private RollDiceDto playerRollDice = null;
+  private RollDiceDto enemyRollDice = null;
 
   public ResponseStartBattleDto execute(StartBattleDto dto) {
-    Enemy enemy = enemyRepository.findBySlugIgnoreCase(dto.getEnemySlug()).orElseThrow(EnemyNotFoundException::new);
+    Enemy enemy = selectEnemy(dto.getEnemySlug());
     Player player = playerRepository.findByUsernameIgnoreCase(dto.getPlayerUsername())
         .orElseThrow(PlayerNotFoundException::new);
 
@@ -46,19 +46,27 @@ public class StartBattleUseCase {
 
     battleRepository.save(battle);
 
-    return BattleMapper.INSTANCE.toDto(battle, playerRollDices, enemyRollDices);
+    return BattleMapper.INSTANCE.toDto(battle, playerRollDice, enemyRollDice);
+  }
+
+  private Enemy selectEnemy(String enemySlug) {
+    if (enemySlug == null) {
+      return enemyRepository.findRandom().orElseThrow(EnemyNotFoundException::new);
+    }
+
+    return enemyRepository.findBySlugIgnoreCase(enemySlug).orElseThrow(EnemyNotFoundException::new);
   }
 
   private void rollDices() {
     while (isPlayerStartBattle == null) {
-      playerRollDices = DiceUtil.rollInitiativeDice();
-      enemyRollDices = DiceUtil.rollInitiativeDice();
+      playerRollDice = DiceUtil.rollInitiativeDice();
+      enemyRollDice = DiceUtil.rollInitiativeDice();
 
-      if (playerRollDices.getResult() == enemyRollDices.getResult()) {
+      if (playerRollDice.getResult() == enemyRollDice.getResult()) {
         continue;
       }
 
-      isPlayerStartBattle = playerRollDices.getResult() > enemyRollDices.getResult();
+      isPlayerStartBattle = playerRollDice.getResult() > enemyRollDice.getResult();
     }
   }
 }
