@@ -3,6 +3,7 @@ package com.victorborzaquel.springrealm.utils.dices;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.victorborzaquel.springrealm.modules.battlecharacters.BattleCharacter;
 import com.victorborzaquel.springrealm.modules.characters.Character;
 import com.victorborzaquel.springrealm.utils.dices.dto.RollDicesDto;
 
@@ -30,7 +31,7 @@ public class DiceUtil {
     return rollDice(1, 12);
   }
 
-  public static RollDicesDto rollDamageDice(Character character) {
+  public static RollDicesDto rollDamageDice(BattleCharacter character) {
     return rollDice(character.getQuantityDices(), character.getQuantityFaces());
   }
 
