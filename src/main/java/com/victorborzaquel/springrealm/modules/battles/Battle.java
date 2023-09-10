@@ -3,15 +3,14 @@ package com.victorborzaquel.springrealm.modules.battles;
 import java.util.List;
 import java.util.UUID;
 
-import org.hibernate.Hibernate;
-
+import com.victorborzaquel.springrealm.modules.battlecharacters.BattleCharacter;
 import com.victorborzaquel.springrealm.modules.enemies.Enemy;
 import com.victorborzaquel.springrealm.modules.players.Player;
 import com.victorborzaquel.springrealm.modules.turns.Turn;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -52,26 +51,14 @@ public class Battle {
   @Builder.Default
   private Boolean inProgress = true;
 
-  @Column(name = "player_pv")
-  private Integer playerPV;
+  @ManyToOne(optional = false, cascade = CascadeType.ALL)
+  private BattleCharacter playerBattleCharacter;
 
-  @Column(name = "enemy_pv")
-  private Integer enemyPV;
+  @ManyToOne(optional = false, cascade = CascadeType.ALL)
+  private BattleCharacter enemyBattleCharacter;
 
   @OneToMany(mappedBy = "battle")
   private List<Turn> turns;
-
-  public void initializeTurns() {
-    Hibernate.initialize(turns);
-  }
-
-  public void playerAttack(Integer damage) {
-    enemyPV = enemyPV - damage < 0 ? 0 : enemyPV - damage;
-  }
-
-  public void enemyAttack(Integer damage) {
-    playerPV = playerPV - damage < 0 ? 0 : playerPV - damage;
-  }
 
   public void endBattle() {
     inProgress = false;
