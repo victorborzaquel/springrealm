@@ -2,19 +2,14 @@ package com.victorborzaquel.springrealm.modules.turns;
 
 import java.util.UUID;
 
-import org.hibernate.Hibernate;
-
 import com.victorborzaquel.springrealm.modules.battles.Battle;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,7 +27,7 @@ import lombok.Setter;
 @Entity(name = "turns")
 @Table(name = "turns")
 public class Turn {
-  
+
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
@@ -49,11 +44,11 @@ public class Turn {
   @Column(name = "enemy_pv", nullable = false)
   private Integer enemyPV;
 
-  @Column(name = "attack_dice", nullable = false)
-  private Integer attackDice;
-  
-  @Column(name = "defense_dice", nullable = false)
-  private Integer defenseDice;
+  @Column(name = "attack_power", nullable = false)
+  private Integer attackPower;
+
+  @Column(name = "defense_power", nullable = false)
+  private Integer defensePower;
 
   @Column(name = "damage", nullable = false)
   private Integer damage;

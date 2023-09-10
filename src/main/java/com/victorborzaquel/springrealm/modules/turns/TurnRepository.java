@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.victorborzaquel.springrealm.modules.battles.Battle;
+import com.victorborzaquel.springrealm.modules.turns.Turn;
 
 public interface TurnRepository extends JpaRepository<Turn, UUID> {
 
