@@ -1,8 +1,5 @@
 package com.victorborzaquel.springrealm.modules.characters.dto;
 
-import java.io.Serializable;
-import java.util.UUID;
-
 import com.victorborzaquel.springrealm.modules.characters.CharacterType;
 
 import lombok.AllArgsConstructor;
@@ -14,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseCharacterDto  {
+public class ResponseCharacterDto {
   private String name;
   private String slug;
   private Integer life;

@@ -3,11 +3,9 @@ package com.victorborzaquel.springrealm.modules.characters;
 import java.util.List;
 import java.util.UUID;
 
-import org.hibernate.Hibernate;
-
-import com.victorborzaquel.springrealm.modules.enemies.Enemy;
-import com.victorborzaquel.springrealm.modules.players.Player;
-import com.victorborzaquel.springrealm.utils.DiceUtil;
+import com.victorborzaquel.springrealm.modules.dices.DiceProvider;
+import com.victorborzaquel.springrealm.modules.enemies.EnemyEntity;
+import com.victorborzaquel.springrealm.modules.players.PlayerEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,7 +22,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
@@ -34,7 +31,7 @@ import lombok.ToString;
 @EqualsAndHashCode(of = "id")
 @Entity(name = "characters")
 @Table(name = "characters")
-public class Character {
+public class CharacterEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
@@ -68,12 +65,12 @@ public class Character {
   private Integer quantityFaces;
 
   @OneToMany(mappedBy = "character")
-  private List<Player> players;
+  private List<PlayerEntity> players;
 
   @OneToMany(mappedBy = "character")
-  private List<Enemy> enemies;
-  
+  private List<EnemyEntity> enemies;
+
   public String getDice() {
-    return DiceUtil.getDiceName(quantityDices, quantityFaces);
+    return DiceProvider.getDiceName(quantityDices, quantityFaces);
   }
 }

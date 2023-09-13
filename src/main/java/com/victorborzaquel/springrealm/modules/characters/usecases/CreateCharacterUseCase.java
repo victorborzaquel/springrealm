@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.victorborzaquel.springrealm.modules.characters.Character;
+import com.victorborzaquel.springrealm.modules.characters.CharacterEntity;
 import com.victorborzaquel.springrealm.modules.characters.CharacterMapper;
 import com.victorborzaquel.springrealm.modules.characters.CharacterRepository;
 import com.victorborzaquel.springrealm.modules.characters.dto.CreateCharacterDto;
@@ -22,11 +22,11 @@ public class CreateCharacterUseCase {
   public ResponseCharacterDto execute(CreateCharacterDto dto) {
     validate(dto);
 
-    Character character = CharacterMapper.INSTANCE.toEntity(dto);
+    CharacterEntity character = CharacterMapper.toEntity(dto);
 
     characterRepository.save(character);
 
-    return CharacterMapper.INSTANCE.toDto(character);
+    return CharacterMapper.toDto(character);
   }
 
   private void validate(CreateCharacterDto dto) {

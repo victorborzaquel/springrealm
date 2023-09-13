@@ -2,7 +2,7 @@ package com.victorborzaquel.springrealm.modules.characters.usecases;
 
 import org.springframework.stereotype.Service;
 
-import com.victorborzaquel.springrealm.modules.characters.Character;
+import com.victorborzaquel.springrealm.modules.characters.CharacterEntity;
 import com.victorborzaquel.springrealm.modules.characters.CharacterMapper;
 import com.victorborzaquel.springrealm.modules.characters.CharacterRepository;
 import com.victorborzaquel.springrealm.modules.characters.dto.ResponseCharacterDto;
@@ -16,8 +16,9 @@ public class FindOneCharacterBySlugUseCase {
   private final CharacterRepository characterRepository;
 
   public ResponseCharacterDto execute(String slug) {
-    Character character = characterRepository.findBySlugIgnoreCase(slug).orElseThrow(CharacterNotFoundException::new);
+    CharacterEntity character = characterRepository.findBySlugIgnoreCase(slug)
+        .orElseThrow(CharacterNotFoundException::new);
 
-    return CharacterMapper.INSTANCE.toDto(character);
+    return CharacterMapper.toDto(character);
   }
 }
