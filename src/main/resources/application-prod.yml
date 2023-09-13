@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${PGUSER}
+    password: ${PGPASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    open-in-view: false
+    show-sql: false
+    database: postgresql
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    url: ${DATABASE_URL}
+    clean-disabled: true
+    user: ${PGUSER}
+    password: ${PGPASSWORD}
+    baseline-on-migrate: true
+    enabled: true
