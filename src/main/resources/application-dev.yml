@@ -3,15 +3,18 @@ spring:
     url: jdbc:postgresql://localhost:5533/springrealm
     username: docker
     password: docker
-    continue-on-error: true
+    driver-class-name: org.postgresql.Driver
   jpa:
     open-in-view: false
-    show-sql: true
-    format-sql: true
+    show-sql: false
+    database: postgresql
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-    properties:
-      hibernate:
-        jdbc:
-          batch_size: 50
+  flyway:
+    url: jdbc:postgresql://localhost:5533/springrealm
+    clean-disabled: true
+    user: docker
+    password: docker
+    baseline-on-migrate: true
+    enabled: true
