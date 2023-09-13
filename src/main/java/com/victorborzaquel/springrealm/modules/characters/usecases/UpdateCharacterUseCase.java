@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.victorborzaquel.springrealm.modules.characters.Character;
+import com.victorborzaquel.springrealm.modules.characters.CharacterEntity;
 import com.victorborzaquel.springrealm.modules.characters.CharacterMapper;
 import com.victorborzaquel.springrealm.modules.characters.CharacterRepository;
 import com.victorborzaquel.springrealm.modules.characters.dto.ResponseCharacterDto;
@@ -22,14 +22,14 @@ public class UpdateCharacterUseCase {
   private final CharacterRepository characterRepository;
 
   public ResponseCharacterDto execute(UUID id, UpdateCharacterDto dto) {
-    Character currentCharacter = characterRepository.findById(id).orElseThrow(CharacterNotFoundException::new);
+    CharacterEntity currentCharacter = characterRepository.findById(id).orElseThrow(CharacterNotFoundException::new);
     validate(id, dto);
 
-    Character character = CharacterMapper.INSTANCE.toEntity(currentCharacter.getId(), dto, currentCharacter.getType());
+    CharacterEntity character = CharacterMapper.toEntity(currentCharacter.getId(), dto, currentCharacter.getType());
 
     characterRepository.save(character);
 
-    return CharacterMapper.INSTANCE.toDto(character);
+    return CharacterMapper.toDto(character);
   }
 
   private void validate(UUID id, UpdateCharacterDto dto) {

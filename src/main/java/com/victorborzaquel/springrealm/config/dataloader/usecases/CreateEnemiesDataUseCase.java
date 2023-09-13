@@ -21,7 +21,7 @@ public class CreateEnemiesDataUseCase {
 
   private void orc() {
     CreateEnemyDto dto = CreateEnemyDto.builder()
-        .firstName("Grugor ")
+        .firstName("Grugor")
         .lastName("Skullcrusher")
         .characterSlug("orc")
         .slug("grugorskullcrusher")

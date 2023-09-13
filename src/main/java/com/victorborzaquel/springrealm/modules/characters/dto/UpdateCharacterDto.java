@@ -1,9 +1,5 @@
 package com.victorborzaquel.springrealm.modules.characters.dto;
 
-import java.io.Serializable;
-
-import com.victorborzaquel.springrealm.modules.characters.CharacterType;
-
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

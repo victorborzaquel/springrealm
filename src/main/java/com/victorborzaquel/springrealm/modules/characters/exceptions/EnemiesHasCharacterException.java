@@ -1,6 +1,6 @@
 package com.victorborzaquel.springrealm.modules.characters.exceptions;
 
-import com.victorborzaquel.springrealm.exceptions.base.ConflictException;
+import com.victorborzaquel.springrealm.shared.exceptions.base.ConflictException;
 
 public class EnemiesHasCharacterException extends ConflictException {
   private static String reason = "Enemies has a character";

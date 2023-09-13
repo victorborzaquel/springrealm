@@ -6,14 +6,23 @@ import java.util.UUID;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
-import com.victorborzaquel.springrealm.modules.battles.Battle;
-import com.victorborzaquel.springrealm.modules.players.Player;
+import com.victorborzaquel.springrealm.modules.players.PlayerEntity;
 
-public interface BattleRepository extends JpaRepository<Battle, UUID> {
-  Page<Battle> findAllByPlayer(Pageable pageable, Player player);
+public interface BattleRepository extends JpaRepository<BattleEntity, UUID> {
+  Boolean existsByPlayerAndEndedAtNull(PlayerEntity player);
 
-  Boolean existsByPlayerAndInProgressTrue(Player player);
+  Boolean existsByPlayerUsernameAndEndedAtNull(String username);
 
-  Optional<Battle> findByPlayerAndInProgressTrue(Player player);
+  Optional<BattleEntity> findByPlayerAndEndedAtNull(PlayerEntity player);
+
+  Optional<BattleEntity> findByPlayerUsernameAndEndedAtNull(String username);
+
+  @Query("SELECT b FROM battles b WHERE b.player = :player ORDER BY b.endedAt DESC")
+  Optional<BattleEntity> findLastEndedAtByPlayer(PlayerEntity player);
+
+  Page<BattleEntity> findAllByPlayerAndEndedAtNotNull(PlayerEntity player, Pageable pageable);
+
+  Page<BattleEntity> findAllByEndedAtNotNull(Pageable pageable);
 }

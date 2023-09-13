@@ -5,17 +5,17 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.victorborzaquel.springrealm.modules.characters.Character;
+import com.victorborzaquel.springrealm.modules.characters.CharacterEntity;
 import com.victorborzaquel.springrealm.modules.characters.CharacterRepository;
 import com.victorborzaquel.springrealm.modules.characters.CharacterType;
 import com.victorborzaquel.springrealm.modules.characters.exceptions.CharacterNotFoundException;
-import com.victorborzaquel.springrealm.modules.enemies.Enemy;
+import com.victorborzaquel.springrealm.modules.enemies.EnemyEntity;
 import com.victorborzaquel.springrealm.modules.enemies.EnemyMapper;
 import com.victorborzaquel.springrealm.modules.enemies.EnemyRepository;
 import com.victorborzaquel.springrealm.modules.enemies.dto.CreateEnemyDto;
 import com.victorborzaquel.springrealm.modules.enemies.dto.ResponseEnemyDto;
 import com.victorborzaquel.springrealm.modules.enemies.exceptions.EnemyAlreadyExistsException;
-import com.victorborzaquel.springrealm.modules.enemies.exceptions.EnemyIsNotHeroException;
+import com.victorborzaquel.springrealm.modules.enemies.exceptions.EnemyCharacterIsNotMonsterException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,21 +28,21 @@ public class CreateEnemyUseCase {
   public ResponseEnemyDto execute(CreateEnemyDto dto) {
     validate(dto);
 
-    Character character = characterRepository.findBySlugIgnoreCase(dto.getCharacterSlug())
+    CharacterEntity character = characterRepository.findBySlugIgnoreCase(dto.getCharacterSlug())
         .orElseThrow(CharacterNotFoundException::new);
 
     validateCharacter(character);
 
-    Enemy enemy = EnemyMapper.INSTANCE.toEntity(dto, character);
+    EnemyEntity enemy = EnemyMapper.toEntity(dto, character);
 
     enemyRepository.save(enemy);
 
-    return EnemyMapper.INSTANCE.toDto(enemy);
+    return EnemyMapper.toDto(enemy);
   }
 
-  private void validateCharacter(Character character) {
-    if (character.getType().equals(CharacterType.HERO)) {
-      throw new EnemyIsNotHeroException();
+  private void validateCharacter(CharacterEntity character) {
+    if (!character.getType().equals(CharacterType.MONSTER)) {
+      throw new EnemyCharacterIsNotMonsterException();
     }
   }
 

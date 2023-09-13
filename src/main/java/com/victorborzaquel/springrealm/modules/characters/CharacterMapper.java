@@ -3,37 +3,61 @@ package com.victorborzaquel.springrealm.modules.characters;
 import java.util.List;
 import java.util.UUID;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 
 import com.victorborzaquel.springrealm.modules.characters.dto.CreateCharacterDto;
 import com.victorborzaquel.springrealm.modules.characters.dto.ResponseCharacterDto;
 import com.victorborzaquel.springrealm.modules.characters.dto.UpdateCharacterDto;
 
-@Mapper
-public interface CharacterMapper {
-  CharacterMapper INSTANCE = Mappers.getMapper(CharacterMapper.class);
-
-  ResponseCharacterDto toDto(Character character);
-
-  List<ResponseCharacterDto> toDto(List<Character> characters);
-
-  default Page<ResponseCharacterDto> toDto(Page<Character> characterPage) {
-    return new PageImpl<>(
-        toDto(characterPage.getContent()),
-        characterPage.getPageable(),
-        characterPage.getTotalElements());
+public class CharacterMapper {
+  public static ResponseCharacterDto toDto(CharacterEntity character) {
+    return ResponseCharacterDto.builder()
+        .agility(character.getAgility())
+        .defense(character.getDefense())
+        .dice(character.getDice())
+        .life(character.getLife())
+        .name(character.getName())
+        .slug(character.getSlug())
+        .strength(character.getStrength())
+        .type(character.getType())
+        .build();
   }
 
-  @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID())")
-  @Mapping(target = "enemies", ignore = true)
-  @Mapping(target = "players", ignore = true)
-  Character toEntity(CreateCharacterDto dto);
+  public static List<ResponseCharacterDto> toDto(List<CharacterEntity> characters) {
+    return characters.stream().map(CharacterMapper::toDto).toList();
+  }
 
-  @Mapping(target = "enemies", ignore = true)
-  @Mapping(target = "players", ignore = true)
-  Character toEntity(UUID id, UpdateCharacterDto dto, CharacterType type);
+  public static Page<ResponseCharacterDto> toDto(Page<CharacterEntity> characters) {
+    return characters.map(CharacterMapper::toDto);
+  }
+
+  public static CharacterEntity toEntity(CreateCharacterDto dto) {
+    return CharacterEntity.builder()
+        .agility(dto.getAgility())
+        .defense(dto.getDefense())
+        .id(UUID.randomUUID())
+        .life(dto.getLife())
+        .name(dto.getName())
+        .quantityDices(dto.getQuantityDices())
+        .strength(dto.getStrength())
+        .slug(dto.getSlug())
+        .quantityFaces(dto.getQuantityFaces())
+        .type(dto.getType())
+        .build();
+  }
+
+  public static CharacterEntity toEntity(UUID id, UpdateCharacterDto dto, CharacterType type) {
+    return CharacterEntity.builder()
+        .agility(dto.getAgility())
+        .defense(dto.getDefense())
+        .id(id)
+        .life(dto.getLife())
+        .name(dto.getName())
+        .quantityDices(dto.getQuantityDices())
+        .strength(dto.getStrength())
+        .slug(dto.getSlug())
+        .quantityFaces(dto.getQuantityFaces())
+        .type(type)
+        .build();
+  }
 }

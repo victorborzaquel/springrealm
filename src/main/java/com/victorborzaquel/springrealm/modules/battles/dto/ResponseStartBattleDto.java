@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResponseStartBattleDto {
-  private Boolean isPlayerInitiative;
-  private ResponseStartBattlePlayer player;
-  private ResponseStartBattleEnemy enemy;
+  private ResponsePlayerBattleDto player;
+  private ResponseEnemyBattleDto enemy;
 }

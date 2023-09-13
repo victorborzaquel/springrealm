@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.victorborzaquel.springrealm.modules.players.Player;
+import com.victorborzaquel.springrealm.modules.players.PlayerEntity;
 import com.victorborzaquel.springrealm.modules.players.PlayerRepository;
 import com.victorborzaquel.springrealm.modules.players.exceptions.PlayerNotFoundException;
 
@@ -16,7 +16,7 @@ public class DeletePlayerUseCase {
   private final PlayerRepository playerRepository;
 
   public void execute(UUID id) {
-    Player player = playerRepository.findById(id).orElseThrow(PlayerNotFoundException::new);
+    PlayerEntity player = playerRepository.findById(id).orElseThrow(PlayerNotFoundException::new);
 
     playerRepository.delete(player);
   }
