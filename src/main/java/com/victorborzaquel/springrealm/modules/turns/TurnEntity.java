@@ -5,8 +5,10 @@ import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.victorborzaquel.springrealm.modules.battles.Battle;
+import com.victorborzaquel.springrealm.modules.battles.BattleEntity;
+import com.victorborzaquel.springrealm.modules.dices.DiceEntity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,8 +31,7 @@ import lombok.Setter;
 @EqualsAndHashCode(of = "id")
 @Entity(name = "turns")
 @Table(name = "turns")
-public class Turn {
-
+public class TurnEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
@@ -60,7 +61,15 @@ public class Turn {
   @Column(name = "damage", nullable = false)
   private Integer damage;
 
-  @ManyToOne(optional = false)
-  private Battle battle;
+  @ManyToOne(optional = false, cascade = CascadeType.ALL)
+  private DiceEntity attackDice;
 
+  @ManyToOne(optional = false, cascade = CascadeType.ALL)
+  private DiceEntity defenseDice;
+
+  @ManyToOne(optional = true, cascade = CascadeType.ALL)
+  private DiceEntity damageDice;
+
+  @ManyToOne(optional = false)
+  private BattleEntity battle;
 }

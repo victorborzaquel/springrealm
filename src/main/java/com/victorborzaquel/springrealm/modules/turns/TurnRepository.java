@@ -3,15 +3,16 @@ package com.victorborzaquel.springrealm.modules.turns;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.victorborzaquel.springrealm.modules.battles.Battle;
-import com.victorborzaquel.springrealm.modules.turns.Turn;
+import com.victorborzaquel.springrealm.modules.battles.BattleEntity;
 
-public interface TurnRepository extends JpaRepository<Turn, UUID> {
+public interface TurnRepository extends JpaRepository<TurnEntity, UUID> {
+  Integer countByBattle(BattleEntity battle);
 
-  Integer countByBattle(Battle battle);
+  List<TurnEntity> findAllByBattle(BattleEntity battle);
 
-  List<Turn> findAllByBattle(Battle battle);
-
+  Page<TurnEntity> findAllByBattle(BattleEntity battle, Pageable pageable);
 }
