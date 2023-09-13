@@ -14,5 +14,6 @@ public class StartBattleDto {
   @NotEmpty(message = "Player username is required")
   private String playerUsername;
 
+  @NotEmpty(message = "Enemy slug is required")
   private String enemySlug;
 }

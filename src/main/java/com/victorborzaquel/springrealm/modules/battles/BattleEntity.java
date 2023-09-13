@@ -6,10 +6,10 @@ import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.victorborzaquel.springrealm.modules.battlecharacters.BattleCharacter;
-import com.victorborzaquel.springrealm.modules.enemies.Enemy;
-import com.victorborzaquel.springrealm.modules.players.Player;
-import com.victorborzaquel.springrealm.modules.turns.Turn;
+import com.victorborzaquel.springrealm.modules.battlecharacters.BattleCharacterEntity;
+import com.victorborzaquel.springrealm.modules.enemies.EnemyEntity;
+import com.victorborzaquel.springrealm.modules.players.PlayerEntity;
+import com.victorborzaquel.springrealm.modules.turns.TurnEntity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -35,7 +35,7 @@ import lombok.Setter;
 @EqualsAndHashCode(of = "id")
 @Entity(name = "battles")
 @Table(name = "battles")
-public class Battle {
+public class BattleEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
@@ -48,29 +48,62 @@ public class Battle {
   private LocalDateTime endedAt;
 
   @ManyToOne(optional = false)
-  private Player player;
+  private PlayerEntity player;
 
   @ManyToOne(optional = false)
-  private Enemy enemy;
+  private EnemyEntity enemy;
 
-  @Column(name = "is_player_initiative", nullable = false)
+  @Column(nullable = false)
+  @Builder.Default
+  private Integer quantityTurns = 0;
+
+  @Column(nullable = false)
+  @Builder.Default
+  private BattleStatus status = BattleStatus.INITIAL_ROLL;
+
+  @Column(name = "is_player_initiative", nullable = true)
   private Boolean isPlayerInitiative;
 
   @ManyToOne(optional = false, cascade = CascadeType.ALL)
-  private BattleCharacter playerBattleCharacter;
+  private BattleCharacterEntity playerBattleCharacter;
 
   @ManyToOne(optional = false, cascade = CascadeType.ALL)
-  private BattleCharacter enemyBattleCharacter;
+  private BattleCharacterEntity enemyBattleCharacter;
 
   @OneToMany(mappedBy = "battle", cascade = CascadeType.REMOVE)
-  private List<Turn> turns;
+  private List<TurnEntity> turns;
+
+  public void setPlayerTurn() {
+    this.status = BattleStatus.PLAYER_TURN;
+  }
+
+  public void setEnemyTurn() {
+    this.status = BattleStatus.ENEMY_TURN;
+  }
+
+  public void addTurn() {
+    this.quantityTurns++;
+  }
+
+  public Boolean isInitialRoll() {
+    return this.status == BattleStatus.INITIAL_ROLL;
+  }
+
+  public Boolean isPlayerTurn() {
+    return this.status == BattleStatus.PLAYER_TURN;
+  }
+
+  public Boolean isEnemyTurn() {
+    return this.status == BattleStatus.ENEMY_TURN;
+  }
 
   public void endBattle() {
-    endedAt = LocalDateTime.now();
+    this.endedAt = LocalDateTime.now();
+    this.status = BattleStatus.FINISHED;
   }
 
   public Boolean getIsInProgress() {
-    return endedAt == null;
+    return this.endedAt == null;
   }
 
   public Boolean getIsPlayerWinner() {
@@ -78,6 +111,6 @@ public class Battle {
       return null;
     }
 
-    return playerBattleCharacter.getPv() > 0;
+    return this.playerBattleCharacter.getPv() > 0;
   }
 }

@@ -6,7 +6,7 @@ import com.victorborzaquel.springrealm.modules.battlecharacters.BattleCharacterE
 import com.victorborzaquel.springrealm.modules.battles.BattleEntity;
 import com.victorborzaquel.springrealm.modules.battles.BattleMapper;
 import com.victorborzaquel.springrealm.modules.battles.BattleRepository;
-import com.victorborzaquel.springrealm.modules.battles.dto.AttackBattleDto;
+import com.victorborzaquel.springrealm.modules.battles.dto.DefenseBattleDto;
 import com.victorborzaquel.springrealm.modules.battles.dto.ResponseAttackBattleDto;
 import com.victorborzaquel.springrealm.modules.battles.exceptions.NotAtThatStageException;
 import com.victorborzaquel.springrealm.modules.battles.exceptions.PlayerNotAlreadyInBattleException;
@@ -21,17 +21,18 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class AttackBattleUseCase {
+public class DefenseBattleUseCase {
   private final BattleRepository battleRepository;
   private final TurnRepository turnRepository;
+
   private final DiceProvider diceProvider;
 
   @Transactional
-  public ResponseAttackBattleDto execute(AttackBattleDto dto) {
+  public ResponseAttackBattleDto execute(DefenseBattleDto dto) {
     BattleEntity battle = battleRepository.findByPlayerUsernameAndEndedAtNull(dto.getPlayerUsername())
         .orElseThrow(PlayerNotAlreadyInBattleException::new);
 
-    if (!battle.isPlayerTurn()) {
+    if (!battle.isEnemyTurn()) {
       throw new NotAtThatStageException(battle);
     }
 
@@ -41,28 +42,28 @@ public class AttackBattleUseCase {
     BattleCharacterEntity enemy = battle.getEnemyBattleCharacter();
 
     RollDiceDto attackPowerDices = diceProvider.rollTurnDice();
-    Integer attack = player.calculeAttack(attackPowerDices.getResult());
+    Integer attack = enemy.calculeAttack(attackPowerDices.getResult());
 
     RollDiceDto defensePowerDices = diceProvider.rollTurnDice();
-    Integer defense = enemy.calculeDefense(defensePowerDices.getResult());
+    Integer defense = player.calculeDefense(defensePowerDices.getResult());
 
     Integer damage = 0;
     RollDiceDto damageDices = null;
     if (attack > defense) {
-      damageDices = diceProvider.rollDamageDice(player);
+      damageDices = diceProvider.rollDamageDice(enemy);
       damage = damageDices.getResult();
 
-      enemy.damage(damage);
+      player.damage(damage);
     }
 
-    if (enemy.getIsDead()) {
+    if (player.getIsDead()) {
       battle.endBattle();
     }
 
     TurnEntity turn = TurnEntity.builder()
         .battle(battle)
         .number(battle.getQuantityTurns())
-        .isPlayerTurn(true)
+        .isPlayerTurn(false)
         .playerPV(player.getPv())
         .enemyPV(enemy.getPv())
         .attackPower(attack)
@@ -73,7 +74,7 @@ public class AttackBattleUseCase {
         .damageDice(DiceMapper.toEntity(damageDices))
         .build();
 
-    battle.setEnemyTurn();
+    battle.setPlayerTurn();
 
     battleRepository.save(battle);
     turnRepository.save(turn);

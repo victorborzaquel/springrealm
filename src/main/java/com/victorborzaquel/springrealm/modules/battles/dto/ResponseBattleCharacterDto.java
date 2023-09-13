@@ -9,9 +9,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseAttackBattleEnemy {
+public class ResponseBattleCharacterDto {
   private String name;
-  private String slug;
-  private ResponseBattleCharacter character;
-  private ResponseTurnDto turn;
+  private Integer pv;
+  private Integer strength;
+  private Integer agility;
+  private Integer defense;
+  private String dice;
 }

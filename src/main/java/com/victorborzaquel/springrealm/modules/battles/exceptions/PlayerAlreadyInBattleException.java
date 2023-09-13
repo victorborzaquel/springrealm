@@ -1,6 +1,6 @@
 package com.victorborzaquel.springrealm.modules.battles.exceptions;
 
-import com.victorborzaquel.springrealm.exceptions.base.AlreadyExistsException;
+import com.victorborzaquel.springrealm.shared.exceptions.base.AlreadyExistsException;
 
 public class PlayerAlreadyInBattleException extends AlreadyExistsException {
 

@@ -1,5 +1,6 @@
 package com.victorborzaquel.springrealm.modules.battles.dto;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseAttackTurnDto {
-  private ResponseTurnDto player;
-  private ResponseTurnDto enemy;
+public class DefenseBattleDto {
+  @NotEmpty(message = "Player username is required")
+  private String playerUsername;
 }
