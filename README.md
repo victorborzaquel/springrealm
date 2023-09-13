@@ -1,5 +1,7 @@
 # Victor's Springrealm: A Jornada Java
 
+![](.github/images/cover.jpg)
+
 API de Jogo RPG desenvolvida com Spring Boot. Esta API permite a criação e gerenciamento de personagens, jogadores, inimigos, batalhas e histórico de batalhas para um jogo de RPG.
 
 ## Índice
@@ -66,44 +68,44 @@ A API possui os seguintes endpoints:
 
 ### Jogador (`/players`)
 
-- **POST** ` /`: Crie um jogador.
-- **GET** ` /`: Busque todos os jogadores.
-- **GET** ` /{id}`: Busque um jogador pelo id.
-- **GET** ` /username/{username}`: Busque um jogador pelo username.
-- **PUT** ` /{id}`: Edição de um jogador pelo id.
-- **PUT** ` /{username}`: Edição de um jogador pelo username.
-- **DELETE** ` /{id}`: Delete um jogador pelo id.
-- **DELETE** ` /username/{username}`: Delete um jogador pelo username.
+- **POST** `/`: Crie um jogador.
+- **GET** `/`: Busque todos os jogadores.
+- **GET** `/{id}`: Busque um jogador pelo id.
+- **GET** `/username/{username}`: Busque um jogador pelo username.
+- **PUT** `/{id}`: Edição de um jogador pelo id.
+- **PUT** `/{username}`: Edição de um jogador pelo username.
+- **DELETE** `/{id}`: Delete um jogador pelo id.
+- **DELETE** `/username/{username}`: Delete um jogador pelo username.
 
 ### Inimigo (`/enemies`)
 
-- **POST** ` /`: Crie um inimigo.
-- **GET** ` /`: Busque todos os inimigos.
-- **GET** ` /{id}`: Busque um inimigo pelo id.
-- **GET** ` /slug/{slug}`: Busque um inimigo pelo slug.
-- **PUT** ` /{id}`: Edição de um inimigo pelo id.
+- **POST** `/`: Crie um inimigo.
+- **GET** `/`: Busque todos os inimigos.
+- **GET** `/{id}`: Busque um inimigo pelo id.
+- **GET** `/slug/{slug}`: Busque um inimigo pelo slug.
+- **PUT** `/{id}`: Edição de um inimigo pelo id.
 - **PUT** ` /slug/{slug}`: Edição de um inimigo pelo slug.
 
 ### Personagem (`/characters`)
 
-- **POST** ` /`: Crie um personagem.
-- **GET** ` /`: Busque todos os personagens.
-- **GET** ` /type`: Busque todos os personagens de um tipo específico.
-- **GET** ` /{id}`: Busque um personagem pelo id.
-- **GET** ` /slug/{slug}`: Busque um personagem pelo slug.
-- **PUT** ` /{id}`: Edição de um personagem pelo id.
-- **PUT** ` /{slug}`: Edição de um personagem pelo slug.
+- **POST** `/`: Crie um personagem.
+- **GET** `/`: Busque todos os personagens.
+- **GET** `/type`: Busque todos os personagens de um tipo específico.
+- **GET** `/{id}`: Busque um personagem pelo id.
+- **GET** `/slug/{slug}`: Busque um personagem pelo slug.
+- **PUT** `/{id}`: Edição de um personagem pelo id.
+- **PUT** `/{slug}`: Edição de um personagem pelo slug.
 
 ### Histórico (`/histories`)
 
-- **GET** ` /`: Busque todas as batalhas.
-- **GET** ` /player/{username}`: Busque todas as batalhas de um jogador.
-- **GET** ` /{id}`: Busque todas as informações de uma batalha pelo id.
+- **GET** `/`: Busque todas as batalhas.
+- **GET** `/player/{username}`: Busque todas as batalhas de um jogador.
+- **GET** `/{id}`: Busque todas as informações de uma batalha pelo id.
 
 ### Batalha (`/battles`)
 
-- **POST** ` /start`: Inicie uma batalha.
-- **POST** ` /attack`: Jogue seu turno na batalha.
+- **POST** `/start`: Inicie uma batalha.
+- **POST** `/attack`: Jogue seu turno na batalha.
 
 ## Documentação Completa
 
