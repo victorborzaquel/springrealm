@@ -1,4 +1,4 @@
-package com.victorborzaquel.springrealm.modules.classes.usecases;
+package com.victorborzaquel.springrealm.modules.characters.usecases;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -16,13 +16,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.victorborzaquel.springrealm.modules.characters.Character;
+import com.victorborzaquel.springrealm.modules.characters.CharacterEntity;
 import com.victorborzaquel.springrealm.modules.characters.CharacterRepository;
 import com.victorborzaquel.springrealm.modules.characters.CharacterType;
 import com.victorborzaquel.springrealm.modules.characters.dto.CreateCharacterDto;
 import com.victorborzaquel.springrealm.modules.characters.dto.ResponseCharacterDto;
 import com.victorborzaquel.springrealm.modules.characters.exceptions.CharacterAlreadyExistsException;
-import com.victorborzaquel.springrealm.modules.characters.usecases.CreateCharacterUseCase;
 
 @ExtendWith(MockitoExtension.class)
 class CreateCharacterUseCaseTest {
@@ -36,7 +35,7 @@ class CreateCharacterUseCaseTest {
   private final UUID id = UUID.fromString("84f40250-e73f-4ee1-b903-25bcdbb6cddc");
 
   private CreateCharacterDto dto;
-  private Character entity;
+  private CharacterEntity entity;
 
   @BeforeEach
   void setUp() {
@@ -51,7 +50,7 @@ class CreateCharacterUseCaseTest {
         .quantityFaces(12)
         .build();
 
-    entity = Character.builder()
+    entity = CharacterEntity.builder()
         .id(id)
         .name("Guerreiro")
         .life(20)
@@ -65,7 +64,7 @@ class CreateCharacterUseCaseTest {
   }
 
   @Test
-  void createClass() {
+  void testCreateCharacter() {
     when(characterRepository.save(any())).thenReturn(entity);
 
     ResponseCharacterDto response = createCharacterUseCase.execute(dto);
@@ -84,10 +83,19 @@ class CreateCharacterUseCaseTest {
   }
 
   @Test
-  void existsClass() {
+  void testExistsCharacterName() {
     when(characterRepository.existsByName(any())).thenReturn(true);
 
-    assertThrows(CharacterAlreadyExistsException.class, () -> createCharacterUseCase.execute(dto), "Class already exists");
+    assertThrows(CharacterAlreadyExistsException.class, () -> createCharacterUseCase.execute(dto), "Character already exists");
+
+    verify(characterRepository, times(0)).save(any());
+  }
+
+  @Test
+  void testExistsCharacterSlug() {
+    when(characterRepository.existsBySlug(any())).thenReturn(true);
+
+    assertThrows(CharacterAlreadyExistsException.class, () -> createCharacterUseCase.execute(dto), "Character already exists");
 
     verify(characterRepository, times(0)).save(any());
   }
