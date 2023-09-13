@@ -1,13 +1,13 @@
 server:
-  port: 9988
+  port: ${SPRING_PORT}
 spring:
   profiles:
-    active: dev
+    active: ${SPRING_PROFILE}
   application:
     name: springrealm
-# springdoc:
-#   api-docs:
-#     path: /docs
-#   swagger-ui:
-#     path: /swagger-ui.html
-#     operations-sorter: method
+springdoc:
+  api-docs:
+    path: /docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
