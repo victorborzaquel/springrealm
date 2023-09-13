@@ -7,7 +7,7 @@ spring:
     name: springrealm
 springdoc:
   api-docs:
-    path: /docs
+    path: /api-docs
   swagger-ui:
     path: /swagger-ui.html
     operations-sorter: method
