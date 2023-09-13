@@ -12,7 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResponseEnemyDto {
-  private String name;
+  private String firstName;
+  private String lastName;
+  private String fullName;
   private String slug;
   private ResponseCharacterDto character;
 }

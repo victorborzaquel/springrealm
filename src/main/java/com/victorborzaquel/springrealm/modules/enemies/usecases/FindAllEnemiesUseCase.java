@@ -4,7 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.victorborzaquel.springrealm.modules.enemies.Enemy;
+import com.victorborzaquel.springrealm.modules.enemies.EnemyEntity;
 import com.victorborzaquel.springrealm.modules.enemies.EnemyMapper;
 import com.victorborzaquel.springrealm.modules.enemies.EnemyRepository;
 import com.victorborzaquel.springrealm.modules.enemies.dto.ResponseEnemyDto;
@@ -17,8 +17,8 @@ public class FindAllEnemiesUseCase {
   private final EnemyRepository enemyRepository;
 
   public Page<ResponseEnemyDto> execute(Pageable pageable) {
-    Page<Enemy> enemies = enemyRepository.findAll(pageable);
+    Page<EnemyEntity> enemies = enemyRepository.findAll(pageable);
 
-    return EnemyMapper.INSTANCE.toDto(enemies);
+    return EnemyMapper.toDto(enemies);
   }
 }
