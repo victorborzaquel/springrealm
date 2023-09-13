@@ -1,4 +1,4 @@
-package com.victorborzaquel.springrealm.exceptions.base;
+package com.victorborzaquel.springrealm.shared.exceptions.base;
 
 import java.util.List;
 

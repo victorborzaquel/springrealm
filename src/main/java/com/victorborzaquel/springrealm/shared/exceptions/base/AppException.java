@@ -1,12 +1,12 @@
-package com.victorborzaquel.springrealm.exceptions.base;
-
-import org.springframework.http.HttpStatus;
-
-import lombok.Getter;
+package com.victorborzaquel.springrealm.shared.exceptions.base;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.http.HttpStatus;
+
+import lombok.Getter;
 
 @Getter
 public class AppException extends RuntimeException {

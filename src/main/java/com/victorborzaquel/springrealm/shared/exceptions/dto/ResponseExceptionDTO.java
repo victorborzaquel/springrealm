@@ -1,4 +1,4 @@
-package com.victorborzaquel.springrealm.exceptions.dto;
+package com.victorborzaquel.springrealm.shared.exceptions.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
