@@ -5,10 +5,10 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PlayerRepository extends JpaRepository<Player, UUID> {
+public interface PlayerRepository extends JpaRepository<PlayerEntity, UUID> {
   boolean existsByUsername(String username);
 
   boolean existsByUsernameAndIdNot(String username, UUID id);
 
-  Optional<Player> findByUsernameIgnoreCase(String username);
+  Optional<PlayerEntity> findByUsernameIgnoreCase(String username);
 }

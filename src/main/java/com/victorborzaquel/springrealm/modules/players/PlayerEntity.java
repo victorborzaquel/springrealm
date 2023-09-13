@@ -3,9 +3,9 @@ package com.victorborzaquel.springrealm.modules.players;
 import java.util.List;
 import java.util.UUID;
 
-import com.victorborzaquel.springrealm.modules.battles.Battle;
-import com.victorborzaquel.springrealm.modules.characters.Character;
-import com.victorborzaquel.springrealm.utils.NameUtil;
+import com.victorborzaquel.springrealm.modules.battles.BattleEntity;
+import com.victorborzaquel.springrealm.modules.characters.CharacterEntity;
+import com.victorborzaquel.springrealm.shared.utils.NameUtil;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -13,7 +13,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -32,7 +31,7 @@ import lombok.Setter;
 @EqualsAndHashCode(of = "id")
 @Entity(name = "players")
 @Table(name = "players")
-public class Player {
+public class PlayerEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
@@ -47,10 +46,10 @@ public class Player {
   private String username;
 
   @ManyToOne(optional = false)
-  private Character character;
+  private CharacterEntity character;
 
   @OneToMany(mappedBy = "player", cascade = CascadeType.REMOVE)
-  private List<Battle> battles;
+  private List<BattleEntity> battles;
 
   public String getName() {
     return NameUtil.getFullName(this.firstName, this.lastName);

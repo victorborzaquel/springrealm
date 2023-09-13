@@ -4,12 +4,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.victorborzaquel.springrealm.modules.characters.Character;
-import com.victorborzaquel.springrealm.modules.characters.CharacterMapper;
-import com.victorborzaquel.springrealm.modules.characters.CharacterRepository;
-import com.victorborzaquel.springrealm.modules.characters.dto.ResponseCharacterDto;
-import com.victorborzaquel.springrealm.modules.characters.exceptions.CharacterNotFoundException;
-import com.victorborzaquel.springrealm.modules.players.Player;
+import com.victorborzaquel.springrealm.modules.players.PlayerEntity;
 import com.victorborzaquel.springrealm.modules.players.PlayerMapper;
 import com.victorborzaquel.springrealm.modules.players.PlayerRepository;
 import com.victorborzaquel.springrealm.modules.players.dto.ResponsePlayerDto;
@@ -23,8 +18,8 @@ public class FindOnePlayerUseCase {
   private final PlayerRepository playerRepository;
 
   public ResponsePlayerDto execute(UUID id) {
-    Player player = playerRepository.findById(id).orElseThrow(PlayerNotFoundException::new);
+    PlayerEntity player = playerRepository.findById(id).orElseThrow(PlayerNotFoundException::new);
 
-    return PlayerMapper.INSTANCE.toDto(player);
+    return PlayerMapper.toDto(player);
   }
 }
