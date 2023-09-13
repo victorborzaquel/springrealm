@@ -1,19 +1,24 @@
-package com.victorborzaquel.springrealm.utils;
+package com.victorborzaquel.springrealm.modules.dices;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-import com.victorborzaquel.springrealm.modules.battlecharacters.BattleCharacter;
-import com.victorborzaquel.springrealm.utils.dto.RollDiceDto;
+import org.springframework.stereotype.Component;
 
-public class DiceUtil {
+import com.victorborzaquel.springrealm.modules.battlecharacters.BattleCharacterEntity;
+import com.victorborzaquel.springrealm.modules.dices.dto.RollDiceDto;
 
-  public static RollDiceDto rollDice(Integer quantityDices, Integer faces) {
+@Component
+public class DiceProvider {
+
+  public RollDiceDto rollDice(Integer quantityDices, Integer faces) {
+    Random random = new Random();
     Integer result = 0;
     List<Integer> moves = new ArrayList<>();
 
     for (int i = 0; i < quantityDices; i++) {
-      Integer move = (int) (Math.random() * faces) + 1;
+      Integer move = random.nextInt(faces) + 1;
 
       moves.add(move);
       result += move;
@@ -26,15 +31,15 @@ public class DiceUtil {
         .build();
   }
 
-  public static RollDiceDto rollTurnDice() {
+  public RollDiceDto rollTurnDice() {
     return rollDice(1, 12);
   }
 
-  public static RollDiceDto rollDamageDice(BattleCharacter character) {
+  public RollDiceDto rollDamageDice(BattleCharacterEntity character) {
     return rollDice(character.getQuantityDices(), character.getQuantityFaces());
   }
 
-  public static RollDiceDto rollInitiativeDice() {
+  public RollDiceDto rollInitiativeDice() {
     return rollDice(1, 20);
   }
 
