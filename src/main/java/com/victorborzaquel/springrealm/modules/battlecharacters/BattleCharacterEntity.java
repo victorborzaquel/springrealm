@@ -3,8 +3,9 @@ package com.victorborzaquel.springrealm.modules.battlecharacters;
 import java.util.List;
 import java.util.UUID;
 
-import com.victorborzaquel.springrealm.modules.battles.Battle;
+import com.victorborzaquel.springrealm.modules.battles.BattleEntity;
 import com.victorborzaquel.springrealm.modules.characters.CharacterType;
+import com.victorborzaquel.springrealm.modules.dices.DiceProvider;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,8 +31,7 @@ import lombok.Setter;
 @EqualsAndHashCode(of = "id")
 @Entity(name = "battle_characters")
 @Table(name = "battle_characters")
-public class BattleCharacter {
-
+public class BattleCharacterEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
@@ -42,6 +42,12 @@ public class BattleCharacter {
 
   @Column(name = "name", nullable = false)
   private String name;
+
+  @Column(name = "slug", nullable = false)
+  private String slug;
+
+  @Column(name = "life", nullable = false)
+  private Integer life;
 
   @Column(name = "pv", nullable = false)
   private Integer pv;
@@ -62,24 +68,32 @@ public class BattleCharacter {
   private Integer quantityFaces;
 
   @OneToMany(mappedBy = "playerBattleCharacter")
-  private List<Battle> playerBattles;
+  private List<BattleEntity> playerBattles;
 
   @OneToMany(mappedBy = "enemyBattleCharacter")
-  private List<Battle> enemyBattles;
+  private List<BattleEntity> enemyBattles;
 
   public void damage(Integer damage) {
-    pv = Math.max(0, pv - damage);
+    this.pv = Math.max(0, pv - damage);
+  }
+
+  public Integer calculeDefense(Integer defense) {
+    return this.defense + this.agility + defense;
+  }
+
+  public Integer calculeAttack(Integer attack) {
+    return this.strength + this.agility + attack;
   }
 
   public String getDice() {
-    return quantityDices + "d" + quantityFaces;
+    return DiceProvider.getDiceName(quantityDices, quantityFaces);
   }
 
-  public Boolean isAlive() {
+  public Boolean getIsAlive() {
     return pv > 0;
   }
 
-  public Boolean isDead() {
+  public Boolean getIsDead() {
     return pv <= 0;
   }
 }
