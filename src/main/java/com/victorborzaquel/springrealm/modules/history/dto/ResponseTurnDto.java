@@ -1,4 +1,6 @@
-package com.victorborzaquel.springrealm.modules.logs.dto;
+package com.victorborzaquel.springrealm.modules.history.dto;
+
+import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseTurnDto {
+public class ResponseTurnDto implements Serializable {
   ResponseTurnDice damageCaused;
   ResponseTurnDice attackPower;
   ResponseTurnDice adversaryDefensePower;

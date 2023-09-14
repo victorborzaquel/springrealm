@@ -1,4 +1,4 @@
-package com.victorborzaquel.springrealm.modules.logs;
+package com.victorborzaquel.springrealm.modules.history;
 
 import java.util.List;
 
@@ -10,14 +10,17 @@ import com.victorborzaquel.springrealm.modules.battles.dto.ResponseBattleCharact
 import com.victorborzaquel.springrealm.modules.characters.dto.ResponseCharacterDto;
 import com.victorborzaquel.springrealm.modules.enemies.EnemyEntity;
 import com.victorborzaquel.springrealm.modules.enemies.dto.ResponseEnemyDto;
-import com.victorborzaquel.springrealm.modules.logs.dto.ResponseBattleHistoryDto;
-import com.victorborzaquel.springrealm.modules.logs.dto.ResponseBattleLogDto;
-import com.victorborzaquel.springrealm.modules.logs.dto.ResponseTurnLogDto;
+import com.victorborzaquel.springrealm.modules.history.dto.ResponseBattleHistoryDto;
+import com.victorborzaquel.springrealm.modules.history.dto.ResponseBattleLogDto;
+import com.victorborzaquel.springrealm.modules.history.dto.ResponseTurnLogDto;
 import com.victorborzaquel.springrealm.modules.players.PlayerEntity;
 import com.victorborzaquel.springrealm.modules.players.dto.ResponsePlayerDto;
 import com.victorborzaquel.springrealm.modules.turns.TurnEntity;
 
 public class LogMapper {
+  private LogMapper() {
+  }
+  
   public static Page<ResponseBattleHistoryDto> toResponseBattleHistoryDto(Page<BattleEntity> battles) {
     return battles.map(LogMapper::toResponseBattleHistoryDto);
   }

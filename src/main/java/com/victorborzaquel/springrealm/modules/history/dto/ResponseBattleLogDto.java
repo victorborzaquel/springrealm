@@ -1,4 +1,6 @@
-package com.victorborzaquel.springrealm.modules.logs.dto;
+package com.victorborzaquel.springrealm.modules.history.dto;
+
+import java.io.Serializable;
 
 import org.springframework.data.domain.Page;
 
@@ -11,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseBattleLogDto {
+public class ResponseBattleLogDto implements Serializable {
   private ResponseBattleHistoryDto battle;
   private Page<ResponseTurnLogDto> turns;
 }

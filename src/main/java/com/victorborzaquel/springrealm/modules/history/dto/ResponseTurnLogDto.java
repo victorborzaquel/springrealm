@@ -1,5 +1,6 @@
-package com.victorborzaquel.springrealm.modules.logs.dto;
+package com.victorborzaquel.springrealm.modules.history.dto;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseTurnLogDto {
+public class ResponseTurnLogDto implements Serializable {
   private LocalDateTime createdAt;
   private Integer number;
   private Boolean isPlayerTurn;

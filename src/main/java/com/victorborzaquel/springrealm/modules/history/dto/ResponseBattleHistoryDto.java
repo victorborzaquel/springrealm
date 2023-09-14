@@ -1,5 +1,6 @@
-package com.victorborzaquel.springrealm.modules.logs.dto;
+package com.victorborzaquel.springrealm.modules.history.dto;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseBattleHistoryDto {
+public class ResponseBattleHistoryDto implements Serializable {
   private UUID id;
   private LocalDateTime date;
   private Boolean playerWin;

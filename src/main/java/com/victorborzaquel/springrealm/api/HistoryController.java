@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.victorborzaquel.springrealm.modules.logs.dto.ResponseBattleHistoryDto;
-import com.victorborzaquel.springrealm.modules.logs.dto.ResponseBattleLogDto;
-import com.victorborzaquel.springrealm.modules.logs.usecases.FindAllByPlayerUsernameUseCase;
-import com.victorborzaquel.springrealm.modules.logs.usecases.FindAllUseCase;
-import com.victorborzaquel.springrealm.modules.logs.usecases.FindBattleLogUseCase;
+import com.victorborzaquel.springrealm.modules.history.dto.ResponseBattleHistoryDto;
+import com.victorborzaquel.springrealm.modules.history.dto.ResponseBattleLogDto;
+import com.victorborzaquel.springrealm.modules.history.usecases.FindAllByPlayerUsernameUseCase;
+import com.victorborzaquel.springrealm.modules.history.usecases.FindAllUseCase;
+import com.victorborzaquel.springrealm.modules.history.usecases.FindBattleLogUseCase;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("logs")
-public class LogController {
+@RequestMapping("history")
+public class HistoryController {
   private final FindAllUseCase findAllUseCase;
   private final FindAllByPlayerUsernameUseCase findAllByPlayerUsernameUseCase;
   private final FindBattleLogUseCase findBattleLogUseCase;

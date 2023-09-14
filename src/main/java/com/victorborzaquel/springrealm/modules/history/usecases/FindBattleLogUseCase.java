@@ -1,4 +1,4 @@
-package com.victorborzaquel.springrealm.modules.logs.usecases;
+package com.victorborzaquel.springrealm.modules.history.usecases;
 
 import java.util.UUID;
 
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import com.victorborzaquel.springrealm.modules.battles.BattleEntity;
 import com.victorborzaquel.springrealm.modules.battles.BattleRepository;
 import com.victorborzaquel.springrealm.modules.battles.exceptions.BattleNotFoundException;
-import com.victorborzaquel.springrealm.modules.logs.LogMapper;
-import com.victorborzaquel.springrealm.modules.logs.dto.ResponseBattleLogDto;
+import com.victorborzaquel.springrealm.modules.history.LogMapper;
+import com.victorborzaquel.springrealm.modules.history.dto.ResponseBattleLogDto;
 import com.victorborzaquel.springrealm.modules.turns.TurnEntity;
 import com.victorborzaquel.springrealm.modules.turns.TurnRepository;
 
