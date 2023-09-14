@@ -1,5 +1,6 @@
 package com.victorborzaquel.springrealm.modules.battles.usecases;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import com.victorborzaquel.springrealm.modules.battles.BattleEntity;
@@ -21,6 +22,7 @@ public class RollInitialDiceUseCase {
   private final DiceProvider diceProvider;
   private final BattleRepository battleRepository;
 
+  @CacheEvict(key = "#dto.playerUsername", value = "currentBattle")
   public ResponseRollInitialDiceDto execute(RollInitialDiceDto dto) {
     BattleEntity battle = this.battleRepository.findByPlayerUsernameAndEndedAtNull(dto.getPlayerUsername())
         .orElseThrow(PlayerNotAlreadyInBattleException::new);

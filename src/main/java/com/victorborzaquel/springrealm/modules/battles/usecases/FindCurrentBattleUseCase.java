@@ -1,5 +1,6 @@
 package com.victorborzaquel.springrealm.modules.battles.usecases;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.victorborzaquel.springrealm.modules.battles.BattleEntity;
@@ -19,6 +20,7 @@ public class FindCurrentBattleUseCase {
   private final PlayerRepository playerRepository;
   private final BattleRepository battleRepository;
 
+  @Cacheable(key = "#playerUsername", value = "currentBattle")
   public ResponseBattleDto execute(String playerUsername) {
     PlayerEntity player = playerRepository.findByUsernameIgnoreCase(playerUsername)
         .orElseThrow(PlayerNotFoundException::new);

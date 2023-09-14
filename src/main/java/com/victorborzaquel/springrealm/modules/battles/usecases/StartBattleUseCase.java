@@ -1,5 +1,6 @@
 package com.victorborzaquel.springrealm.modules.battles.usecases;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import com.victorborzaquel.springrealm.modules.battles.BattleEntity;
@@ -25,6 +26,7 @@ public class StartBattleUseCase {
   private final EnemyRepository enemyRepository;
   private final PlayerRepository playerRepository;
 
+  @CacheEvict(key = "#dto.playerUsername", value = "currentBattle")
   public ResponseStartBattleDto execute(StartBattleDto dto) {
     EnemyEntity enemy = enemyRepository.findBySlugIgnoreCase(dto.getEnemySlug())
         .orElseThrow(EnemyNotFoundException::new);
