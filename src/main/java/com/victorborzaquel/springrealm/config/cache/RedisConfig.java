@@ -1,6 +1,5 @@
 package com.victorborzaquel.springrealm.config.cache;
 
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
@@ -11,7 +10,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
-@EnableCaching
 public class RedisConfig {
   @Bean
   RedisTemplate<String, Object> redisTemplate(

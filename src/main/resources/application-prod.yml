@@ -18,7 +18,6 @@ spring:
     enabled: true
   data:
     redis:
-      url: redis://${REDISUSER}:${REDISPASSWORD}@${REDISHOST}
       host: ${REDISHOST}
       port: ${REDISPORT}
       username: ${REDISUSER}
