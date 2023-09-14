@@ -9,10 +9,13 @@ import io.swagger.v3.oas.models.info.Info;
 @Configuration
 public class OpenApiConfig {
   @Bean
-  public OpenAPI defaultOpenApiConfig() {
-    return new OpenAPI()
-        .info(new Info().title("Victor's Springrealm: A Jornada Java")
-            .description("API de Jogo RPG desenvolvida com Spring Boot.")
-            .version("1.0.0"));
+  OpenAPI defaultOpenApiConfig() {
+    Info info = new Info();
+    
+    info.setTitle("Victor's Springrealm: A Jornada Java");
+    info.setDescription("API de Jogo RPG desenvolvida com Spring Boot.");
+    info.setVersion("0.0.1: Alpha");
+
+    return new OpenAPI().info(info);
   }
 }
