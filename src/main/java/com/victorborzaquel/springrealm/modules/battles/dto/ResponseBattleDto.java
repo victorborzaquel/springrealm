@@ -1,5 +1,6 @@
 package com.victorborzaquel.springrealm.modules.battles.dto;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseBattleDto {
+public class ResponseBattleDto implements Serializable {
   private UUID id;
   private LocalDateTime createdAt;
   private LocalDateTime endedAt;

@@ -1,5 +1,7 @@
 package com.victorborzaquel.springrealm.modules.battles.dto;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseBattleCharacterDto {
+public class ResponseBattleCharacterDto implements Serializable {
   private String name;
   private Integer pv;
   private Integer strength;

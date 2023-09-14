@@ -1,5 +1,7 @@
 package com.victorborzaquel.springrealm.modules.battles.dto;
 
+import java.io.Serializable;
+
 import com.victorborzaquel.springrealm.modules.dices.dto.ResponseDiceDto;
 
 import lombok.AllArgsConstructor;
@@ -11,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseAttackBattleDto {
+public class ResponseAttackBattleDto implements Serializable {
   private Integer turn;
   private Boolean isPlayerTurn;
   private Integer attackPower;

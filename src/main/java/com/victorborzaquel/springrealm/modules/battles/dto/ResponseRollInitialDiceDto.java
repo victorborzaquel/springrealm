@@ -1,5 +1,7 @@
 package com.victorborzaquel.springrealm.modules.battles.dto;
 
+import java.io.Serializable;
+
 import com.victorborzaquel.springrealm.modules.dices.dto.RollDiceDto;
 
 import lombok.AllArgsConstructor;
@@ -11,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseRollInitialDiceDto {
+public class ResponseRollInitialDiceDto implements Serializable {
   private Boolean isDraw;
   private Boolean isPlayerInitiative;
   private RollDiceDto playerDice;

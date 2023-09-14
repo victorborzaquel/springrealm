@@ -1,5 +1,6 @@
 package com.victorborzaquel.springrealm.modules.dices.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseDiceDto {
+public class ResponseDiceDto implements Serializable {
   private String name;
   private Integer result;
   private List<Integer> moves;

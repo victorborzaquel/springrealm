@@ -1,5 +1,6 @@
 package com.victorborzaquel.springrealm.modules.battlecharacters.dto;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import com.victorborzaquel.springrealm.modules.characters.CharacterType;
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseBattleCharacterDto {
+public class ResponseBattleCharacterDto implements Serializable {
   private UUID id;
   private CharacterType type;
   private String name;
