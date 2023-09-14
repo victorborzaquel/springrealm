@@ -16,9 +16,10 @@ spring:
     password: ${PGPASSWORD}
     baseline-on-migrate: true
     enabled: true
-  # redis:
-  #   url: ${REDIS_URL}
-  #   host: ${REDISHOST}
-  #   port: ${REDISPORT}
-  #   user: ${REDISUSER}
-  #   password: ${REDISPASSWORD}
+  data:
+    redis:
+      url: redis://${REDISUSER}:${REDISPASSWORD}@${REDISHOST}
+      host: ${REDISHOST}
+      port: ${REDISPORT}
+      username: ${REDISUSER}
+      password: ${REDISPASSWORD}
