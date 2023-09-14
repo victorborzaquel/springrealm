@@ -8,7 +8,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +19,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.victorborzaquel.springrealm.modules.characters.CharacterEntity;
 import com.victorborzaquel.springrealm.modules.characters.CharacterRepository;
 import com.victorborzaquel.springrealm.modules.characters.exceptions.CharacterNotFoundException;
-import com.victorborzaquel.springrealm.modules.players.PlayerEntity;
 import com.victorborzaquel.springrealm.modules.players.PlayerRepository;
 import com.victorborzaquel.springrealm.modules.players.dto.CreatePlayerDto;
 import com.victorborzaquel.springrealm.modules.players.dto.ResponsePlayerDto;
