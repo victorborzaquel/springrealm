@@ -4,7 +4,7 @@
 
 API de Jogo RPG desenvolvida com Spring Boot. Esta API permite a criação e gerenciamento de personagens, jogadores, inimigos, batalhas e histórico de batalhas para um jogo de RPG no estilo AD&D.
 
-Acesse a API em produção: [https://api.victorborzaquel.com](https://api.victorborzaquel.com/swagger-ui/index.html)  
+Acesse a API em produção: [https://api.victorborzaquel.com](https://api.victorborzaquel.com)  
 Teste a API: [postman](https://www.postman.com/victorborzaquel/workspace/victor-s-springrealm-a-jornada-java/overview)
 
 ## Índice
