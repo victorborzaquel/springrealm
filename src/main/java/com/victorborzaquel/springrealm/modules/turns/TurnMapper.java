@@ -4,6 +4,9 @@ import com.victorborzaquel.springrealm.modules.battles.dto.ResponseAttackBattleD
 import com.victorborzaquel.springrealm.modules.dices.DiceMapper;
 
 public class TurnMapper {
+  private TurnMapper() {
+  }
+
   public static ResponseAttackBattleDto toResponseAttackBattleDto(TurnEntity turn) {
     return ResponseAttackBattleDto.builder()
         .attackDice(DiceMapper.toDto(turn.getAttackDice()))

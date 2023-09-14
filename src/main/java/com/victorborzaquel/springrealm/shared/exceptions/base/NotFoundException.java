@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 
 public class NotFoundException extends AppException {
-
   public NotFoundException(List<String> errors, String reason) {
     super(
         errors,
@@ -20,5 +19,4 @@ public class NotFoundException extends AppException {
   public NotFoundException() {
     this(null, null);
   }
-
 }

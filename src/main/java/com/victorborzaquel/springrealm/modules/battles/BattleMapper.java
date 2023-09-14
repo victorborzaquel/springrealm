@@ -19,8 +19,12 @@ import com.victorborzaquel.springrealm.modules.players.PlayerEntity;
 import com.victorborzaquel.springrealm.modules.turns.TurnEntity;
 
 public class BattleMapper {
+  private BattleMapper() {
+  }
+
   public static ResponseStartBattleDto toStartBattleDto(BattleEntity battle) {
     return ResponseStartBattleDto.builder()
+        .id(battle.getId())
         .enemy(toEnemyBattleDto(battle.getEnemy(), battle.getEnemyBattleCharacter()))
         .player(toPlayerBattleDto(battle.getPlayer(), battle.getPlayerBattleCharacter()))
         .build();

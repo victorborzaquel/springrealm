@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 
 public class AlreadyExistsException extends AppException {
-
   public AlreadyExistsException(List<String> errors, String reason) {
     super(
         errors,
@@ -20,5 +19,4 @@ public class AlreadyExistsException extends AppException {
   public AlreadyExistsException() {
     this(null, null);
   }
-
 }

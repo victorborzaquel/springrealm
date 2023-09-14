@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class CreateEnemiesDataUseCase {
-
   private final CreateEnemyUseCase createEnemyUseCase;
 
   public void execute() {

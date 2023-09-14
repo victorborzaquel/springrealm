@@ -23,7 +23,6 @@ import com.victorborzaquel.springrealm.shared.exceptions.mapper.ExceptionMapper;
 
 @RestControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
-
   @ExceptionHandler(AppException.class)
   public ResponseEntity<ResponseExceptionDTO> handleException(AppException e) {
     return new ResponseEntity<>(ExceptionMapper.toResponse(e), new HttpHeaders(), e.getHttpStatus());
@@ -67,5 +66,4 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
     return new ResponseEntity<>(ExceptionMapper.toResponse(appException), new HttpHeaders(), httpStatus);
   }
-
 }

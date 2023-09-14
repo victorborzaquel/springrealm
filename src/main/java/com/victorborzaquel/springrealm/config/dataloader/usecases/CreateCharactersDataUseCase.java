@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class CreateCharactersDataUseCase {
-
   private final CreateCharacterUseCase createCharacterUseCase;
 
   public void execute() {

@@ -4,6 +4,9 @@ import com.victorborzaquel.springrealm.modules.dices.dto.ResponseDiceDto;
 import com.victorborzaquel.springrealm.modules.dices.dto.RollDiceDto;
 
 public class DiceMapper {
+  private DiceMapper() {
+  }
+
   public static DiceEntity toEntity(RollDiceDto dto) {
     if (dto == null) {
       return null;

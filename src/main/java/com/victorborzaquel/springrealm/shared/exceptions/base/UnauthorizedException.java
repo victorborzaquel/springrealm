@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 
 public class UnauthorizedException extends AppException {
-
   public UnauthorizedException(List<String> errors, String reason) {
     super(
         errors,
@@ -20,5 +19,4 @@ public class UnauthorizedException extends AppException {
   public UnauthorizedException() {
     this(null, null);
   }
-
 }
