@@ -2,6 +2,7 @@ package com.victorborzaquel.springrealm.config.dataloader;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import com.victorborzaquel.springrealm.config.dataloader.usecases.CreateCharactersDataUseCase;
@@ -15,8 +16,8 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
+@Profile("!test")
 public class SeedDataLoader implements ApplicationRunner {
-
   private final CreateCharactersDataUseCase createCharactersDataUseCase;
   private final CreateEnemiesDataUseCase createEnemiesDataUseCase;
   private final CreatePlayersDataUseCase createPlayersDataUseCase;
@@ -37,5 +38,4 @@ public class SeedDataLoader implements ApplicationRunner {
       createPlayersDataUseCase.execute();
     }
   }
-
 }
