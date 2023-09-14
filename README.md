@@ -2,7 +2,10 @@
 
 ![](.github/images/cover.jpg)
 
-API de Jogo RPG desenvolvida com Spring Boot. Esta API permite a criação e gerenciamento de personagens, jogadores, inimigos, batalhas e histórico de batalhas para um jogo de RPG.
+API de Jogo RPG desenvolvida com Spring Boot. Esta API permite a criação e gerenciamento de personagens, jogadores, inimigos, batalhas e histórico de batalhas para um jogo de RPG no estilo AD&D.
+
+Acesse a API em produção: [https://api.victorborzaquel.com](https://api.victorborzaquel.com/swagger-ui/index.html)  
+Teste a API: [postman](https://www.postman.com/victorborzaquel/workspace/victor-s-springrealm-a-jornada-java/overview)
 
 ## Índice
 
@@ -37,8 +40,31 @@ A API oferece as seguintes funcionalidades principais:
 5. **Histórico de Batalhas:** Acompanhe o histórico de todas as batalhas realizadas, incluindo resultados e detalhes.
 
 ## Como Executar
+Para executar a API, você tem duas opções disponíveis:
+
+## Opção 1: Executando com o Docker
+Você pode executar a API usando o Docker. Siga estas etapas:
+
+1. Certifique-se de que você tenha o Docker instalado em sua máquina.
+
+2. Abra um terminal e execute o seguinte comando para baixar a imagem Docker do seu projeto:
+
+   ```bash
+   docker pull victorborzaquel/springrealm
+   ```
+
+3. Em seguida, inicie um contêiner Docker com a imagem baixada usando o seguinte comando:
+
+   ```bash
+   docker run -d -p 9988:9988 victorborzaquel/springrealm
+   ```
+
+A API estará disponível em [http://localhost:9988](http://localhost:9988).
+
+## Opção 2: Executando localmente
 
 Para executar a API em sua máquina local, siga estas etapas:
+
 
 1. Clone este repositório:
 
@@ -60,7 +86,7 @@ Para executar a API em sua máquina local, siga estas etapas:
 
 4. Execute o projeto Spring Boot.
 
-A API estará disponível em `http://localhost:9988`.
+A API estará disponível em [http://localhost:9988](http://localhost:9988).
 
 ## Endpoints da API
 
@@ -104,15 +130,19 @@ A API possui os seguintes endpoints:
 
 ### Batalha (`/battles`)
 
+- **POST** `/current`: Busque a batalha atual.
 - **POST** `/start`: Inicie uma batalha.
-- **POST** `/attack`: Jogue seu turno na batalha.
+- **POST** `/start/random`: Inicie uma batalha aleatória.
+- **POST** `/initial`: Jogue os dados iniciais para ver quem começa a batalha.
+- **POST** `/attack`: Ataque um inimigo.
+- **POST** `/defense`: Defenda um ataque.
 
 ## Documentação Completa
 
 Para obter informações detalhadas sobre os endpoints, modelos de dados, solicitações e respostas, consulte as documentações detalhadas:
 
 - [Postman](https://www.postman.com/victorborzaquel/workspace/victor-s-springrealm-a-jornada-java/overview)
-- [Swagger](https://www.postman.com/victorborzaquel/workspace/victor-s-springrealm-a-jornada-java/overview)
+- [Swagger](https://api.victorborzaquel.com/swagger-ui/index.html)
 
 ## Conclusão
 
