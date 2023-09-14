@@ -58,6 +58,7 @@ Você pode executar a API usando o Docker. Siga estas etapas:
    ```bash
    docker run -d -p 9988:9988 victorborzaquel/springrealm
    ```
+4. Aguarde um minuto até que a API esteja completamente inicializada.
 
 A API estará disponível em [http://localhost:9988](http://localhost:9988).
 
