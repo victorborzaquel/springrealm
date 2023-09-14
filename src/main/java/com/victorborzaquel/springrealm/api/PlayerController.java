@@ -47,6 +47,7 @@ public class PlayerController {
   private final DeletePlayerByUsernameUseCase deletePlayerByUsernameUseCase;
 
   @PostMapping
+  @ResponseStatus(code = HttpStatus.CREATED)
   public ResponsePlayerDto create(@Valid @RequestBody CreatePlayerDto dto) {
     return createPlayerUseCase.execute(dto);
   }

@@ -1,10 +1,12 @@
 package com.victorborzaquel.springrealm.api;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.victorborzaquel.springrealm.modules.battles.dto.AttackBattleDto;
@@ -43,11 +45,13 @@ public class BattleController {
   }
 
   @PostMapping("start")
+  @ResponseStatus(code = HttpStatus.CREATED)
   public ResponseStartBattleDto start(@Valid @RequestBody StartBattleDto dto) {
     return startBattleUseCase.execute(dto);
   }
 
   @PostMapping("start/random")
+  @ResponseStatus(code = HttpStatus.CREATED)
   public ResponseStartBattleDto startRandom(@Valid @RequestBody StartRandomBattleDto dto) {
     return startRandomBattleUseCase.execute(dto);
   }
