@@ -10,8 +10,12 @@ import com.victorborzaquel.springrealm.modules.characters.dto.ResponseCharacterD
 import com.victorborzaquel.springrealm.modules.characters.dto.UpdateCharacterDto;
 
 public class CharacterMapper {
+  private CharacterMapper() {
+  }
+
   public static ResponseCharacterDto toDto(CharacterEntity character) {
     return ResponseCharacterDto.builder()
+        .id(character.getId())
         .agility(character.getAgility())
         .defense(character.getDefense())
         .dice(character.getDice())

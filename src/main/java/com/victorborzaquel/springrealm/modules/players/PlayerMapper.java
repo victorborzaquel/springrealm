@@ -6,32 +6,23 @@ import java.util.UUID;
 import org.springframework.data.domain.Page;
 
 import com.victorborzaquel.springrealm.modules.characters.CharacterEntity;
-import com.victorborzaquel.springrealm.modules.characters.dto.ResponseCharacterDto;
+import com.victorborzaquel.springrealm.modules.characters.CharacterMapper;
 import com.victorborzaquel.springrealm.modules.players.dto.CreatePlayerDto;
 import com.victorborzaquel.springrealm.modules.players.dto.ResponsePlayerDto;
 import com.victorborzaquel.springrealm.modules.players.dto.UpdatePlayerDto;
 
 public class PlayerMapper {
+  private PlayerMapper() {
+  }
+
   public static ResponsePlayerDto toDto(PlayerEntity player) {
     return ResponsePlayerDto.builder()
-        .character(toDtoResponseCharacter(player.getCharacter()))
+        .id(player.getId())
+        .character(CharacterMapper.toDto(player.getCharacter()))
         .firstName(player.getFirstName())
         .lastName(player.getLastName())
         .fullName(player.getName())
         .username(player.getUsername())
-        .build();
-  }
-
-  public static ResponseCharacterDto toDtoResponseCharacter(CharacterEntity character) {
-    return ResponseCharacterDto.builder()
-        .agility(character.getAgility())
-        .defense(character.getDefense())
-        .dice(character.getDice())
-        .life(character.getLife())
-        .name(character.getName())
-        .slug(character.getSlug())
-        .strength(character.getStrength())
-        .type(character.getType())
         .build();
   }
 
