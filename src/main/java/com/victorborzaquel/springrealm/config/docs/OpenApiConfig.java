@@ -1,7 +1,5 @@
 package com.victorborzaquel.springrealm.config.docs;
 
-import java.util.List;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -29,7 +27,7 @@ public class OpenApiConfig {
 
     return new OpenAPI()
         .info(info)
-        .addServersItem(localhostServer)
-        .addServersItem(productionServer);
+        .addServersItem(productionServer)
+        .addServersItem(localhostServer);
   }
 }
