@@ -20,7 +20,7 @@ public class UpdatePlayerDto {
   private String lastName;
 
   @NotEmpty(message = "Username is required")
-  @Pattern(regexp = "^[a-zA-Z0-9]*$", message = "Username must be alphanumeric")
+  @Pattern(regexp = "^[a-zA-Z0-9-]*$", message = "Username must be alphanumeric and dashes")
   private String username;
 
   @NotEmpty(message = "Character slug is required")

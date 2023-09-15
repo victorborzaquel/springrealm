@@ -20,7 +20,7 @@ public class CreateEnemyDto {
   private String lastName;
 
   @NotEmpty(message = "Slug is required")
-  @Pattern(regexp = "^[a-z]+$", message = "Slug must be in lowercase and without spaces")
+  @Pattern(regexp = "^[a-z-]+$", message = "Slug must be in lowercase and without spaces")
   private String slug;
 
   @NotEmpty(message = "Character slug is required")
