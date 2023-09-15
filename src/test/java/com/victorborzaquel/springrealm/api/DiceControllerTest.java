@@ -14,7 +14,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.victorborzaquel.springrealm.modules.dices.dto.RollDiceDto;
+
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -31,12 +34,14 @@ public class DiceControllerTest {
   }
 
   @Test
-  void get() {
+  void roll() {
+    RollDiceDto dto = RollDiceDto.builder().quantityDices(2).quantityFaces(6).build();
+
     given()
-        .queryParam("quantityFaces", 6)
-        .queryParam("quantityDices", 2)
+        .contentType(ContentType.JSON)
+        .body(dto)
         .when()
-        .get("roll")
+        .post("roll")
         .then()
         .statusCode(HttpStatus.OK.value())
         .body("name", equalTo("2d6"))
