@@ -11,7 +11,7 @@ import com.victorborzaquel.springrealm.modules.battles.dto.RollInitialDiceDto;
 import com.victorborzaquel.springrealm.modules.battles.exceptions.NotAtThatStageException;
 import com.victorborzaquel.springrealm.modules.battles.exceptions.PlayerNotAlreadyInBattleException;
 import com.victorborzaquel.springrealm.modules.dices.DiceProvider;
-import com.victorborzaquel.springrealm.modules.dices.dto.RollDiceDto;
+import com.victorborzaquel.springrealm.modules.dices.dto.DiceDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,8 +31,8 @@ public class RollInitialDiceUseCase {
       throw new NotAtThatStageException(battle);
     }
 
-    RollDiceDto playerDice = diceProvider.rollInitiativeDice();
-    RollDiceDto enemyDice = diceProvider.rollInitiativeDice();
+    DiceDto playerDice = diceProvider.rollInitiativeDice();
+    DiceDto enemyDice = diceProvider.rollInitiativeDice();
 
     Boolean isPlayerInitiative = null;
     Boolean isDraw = playerDice.getResult().equals(enemyDice.getResult());

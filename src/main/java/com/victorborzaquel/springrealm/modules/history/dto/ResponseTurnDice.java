@@ -2,7 +2,7 @@ package com.victorborzaquel.springrealm.modules.history.dto;
 
 import java.io.Serializable;
 
-import com.victorborzaquel.springrealm.modules.dices.dto.RollDiceDto;
+import com.victorborzaquel.springrealm.modules.dices.dto.DiceDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,5 +15,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ResponseTurnDice implements Serializable {
   private Integer total;
-  private RollDiceDto rollDice;
+  private DiceDto rollDice;
 }

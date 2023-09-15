@@ -24,7 +24,7 @@ import com.victorborzaquel.springrealm.modules.battles.dto.RollInitialDiceDto;
 import com.victorborzaquel.springrealm.modules.battles.exceptions.NotAtThatStageException;
 import com.victorborzaquel.springrealm.modules.battles.exceptions.PlayerNotAlreadyInBattleException;
 import com.victorborzaquel.springrealm.modules.dices.DiceProvider;
-import com.victorborzaquel.springrealm.modules.dices.dto.RollDiceDto;
+import com.victorborzaquel.springrealm.modules.dices.dto.DiceDto;
 
 @ExtendWith(MockitoExtension.class)
 public class RollInitialDiceUseCaseTest {
@@ -70,8 +70,8 @@ public class RollInitialDiceUseCaseTest {
 
   @Test
   void testDicesDraw() {
-    RollDiceDto playerDice = RollDiceDto.builder().result(10).build();
-    RollDiceDto enemyDice = RollDiceDto.builder().result(10).build();
+    DiceDto playerDice = DiceDto.builder().result(10).build();
+    DiceDto enemyDice = DiceDto.builder().result(10).build();
 
     when(battleRepository.findByPlayerUsernameAndEndedAtNull(playerUsername)).thenReturn(Optional.ofNullable(battle));
     when(diceProvider.rollInitiativeDice()).thenReturn(playerDice, enemyDice);
@@ -91,8 +91,8 @@ public class RollInitialDiceUseCaseTest {
 
   @Test
   void testPlayerWins() {
-    RollDiceDto playerDice = RollDiceDto.builder().result(10).build();
-    RollDiceDto enemyDice = RollDiceDto.builder().result(5).build();
+    DiceDto playerDice = DiceDto.builder().result(10).build();
+    DiceDto enemyDice = DiceDto.builder().result(5).build();
 
     when(battleRepository.findByPlayerUsernameAndEndedAtNull(playerUsername)).thenReturn(Optional.ofNullable(battle));
     when(diceProvider.rollInitiativeDice()).thenReturn(playerDice, enemyDice);
@@ -112,8 +112,8 @@ public class RollInitialDiceUseCaseTest {
 
   @Test
   void testEnemyWins() {
-    RollDiceDto playerDice = RollDiceDto.builder().result(5).build();
-    RollDiceDto enemyDice = RollDiceDto.builder().result(10).build();
+    DiceDto playerDice = DiceDto.builder().result(5).build();
+    DiceDto enemyDice = DiceDto.builder().result(10).build();
 
     when(battleRepository.findByPlayerUsernameAndEndedAtNull(playerUsername)).thenReturn(Optional.ofNullable(battle));
     when(diceProvider.rollInitiativeDice()).thenReturn(playerDice, enemyDice);

@@ -1,13 +1,13 @@
 package com.victorborzaquel.springrealm.modules.dices;
 
 import com.victorborzaquel.springrealm.modules.dices.dto.ResponseDiceDto;
-import com.victorborzaquel.springrealm.modules.dices.dto.RollDiceDto;
+import com.victorborzaquel.springrealm.modules.dices.dto.DiceDto;
 
 public class DiceMapper {
   private DiceMapper() {
   }
 
-  public static DiceEntity toEntity(RollDiceDto dto) {
+  public static DiceEntity toEntity(DiceDto dto) {
     if (dto == null) {
       return null;
     }

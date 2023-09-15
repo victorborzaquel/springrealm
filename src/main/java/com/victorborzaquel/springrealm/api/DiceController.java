@@ -1,13 +1,15 @@
 package com.victorborzaquel.springrealm.api;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.victorborzaquel.springrealm.modules.dices.dto.DiceDto;
 import com.victorborzaquel.springrealm.modules.dices.dto.RollDiceDto;
 import com.victorborzaquel.springrealm.modules.dices.usecases.RollDiceUseCase;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -16,10 +18,8 @@ import lombok.RequiredArgsConstructor;
 public class DiceController {
   private final RollDiceUseCase rollDiceUseCase;
 
-  @GetMapping("roll")
-  public RollDiceDto get(
-      @RequestParam("quantityDices") Integer quantityDices,
-      @RequestParam("quantityFaces") Integer quantityFaces) {
-    return rollDiceUseCase.execute(quantityDices, quantityFaces);
+  @PostMapping("roll")
+  public DiceDto roll(@Valid @RequestBody RollDiceDto dto) {
+    return rollDiceUseCase.execute(dto);
   }
-}
+} 

@@ -7,12 +7,24 @@ import java.util.Random;
 import org.springframework.stereotype.Component;
 
 import com.victorborzaquel.springrealm.modules.battlecharacters.BattleCharacterEntity;
-import com.victorborzaquel.springrealm.modules.dices.dto.RollDiceDto;
+import com.victorborzaquel.springrealm.modules.dices.dto.DiceDto;
+import com.victorborzaquel.springrealm.shared.exceptions.base.ConflictException;
 
 @Component
 public class DiceProvider {
+  public DiceDto rollDice(Integer quantityDices, Integer faces) {
+    if (quantityDices == null || faces == null) {
+      throw new ConflictException("Quantity dices and faces are required");
+    }
 
-  public RollDiceDto rollDice(Integer quantityDices, Integer faces) {
+    if (quantityDices < 1 || quantityDices > 5) {
+      throw new ConflictException("Quantity dices must be between 1 and 5");
+    }
+
+    if (faces < 3 || faces > 25) {
+      throw new ConflictException("Quantity faces must be between 3 and 25");
+    }
+
     Random random = new Random();
     Integer result = 0;
     List<Integer> moves = new ArrayList<>();
@@ -24,22 +36,22 @@ public class DiceProvider {
       result += move;
     }
 
-    return RollDiceDto.builder()
+    return DiceDto.builder()
         .result(result)
         .moves(moves)
         .name(getDiceName(quantityDices, faces))
         .build();
   }
 
-  public RollDiceDto rollTurnDice() {
+  public DiceDto rollTurnDice() {
     return rollDice(1, 12);
   }
 
-  public RollDiceDto rollDamageDice(BattleCharacterEntity character) {
+  public DiceDto rollDamageDice(BattleCharacterEntity character) {
     return rollDice(character.getQuantityDices(), character.getQuantityFaces());
   }
 
-  public RollDiceDto rollInitiativeDice() {
+  public DiceDto rollInitiativeDice() {
     return rollDice(1, 20);
   }
 

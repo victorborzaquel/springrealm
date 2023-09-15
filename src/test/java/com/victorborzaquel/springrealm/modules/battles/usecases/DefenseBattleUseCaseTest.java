@@ -25,7 +25,7 @@ import com.victorborzaquel.springrealm.modules.battles.dto.ResponseAttackBattleD
 import com.victorborzaquel.springrealm.modules.battles.exceptions.NotAtThatStageException;
 import com.victorborzaquel.springrealm.modules.battles.exceptions.PlayerNotAlreadyInBattleException;
 import com.victorborzaquel.springrealm.modules.dices.DiceProvider;
-import com.victorborzaquel.springrealm.modules.dices.dto.RollDiceDto;
+import com.victorborzaquel.springrealm.modules.dices.dto.DiceDto;
 import com.victorborzaquel.springrealm.modules.turns.TurnRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -82,8 +82,8 @@ public class DefenseBattleUseCaseTest {
 
   @Test
   void testPlayerDefenseAttack() {
-    RollDiceDto attackRollDice = RollDiceDto.builder().result(5).build();
-    RollDiceDto defenseRollDice = RollDiceDto.builder().result(10).build();
+    DiceDto attackRollDice = DiceDto.builder().result(5).build();
+    DiceDto defenseRollDice = DiceDto.builder().result(10).build();
 
     when(battleRepository.findByPlayerUsernameAndEndedAtNull(dto.getPlayerUsername())).thenReturn(Optional.of(battle));
     when(diceProvider.rollTurnDice()).thenReturn(attackRollDice, defenseRollDice);
@@ -107,9 +107,9 @@ public class DefenseBattleUseCaseTest {
 
   @Test
   void testEnemyAttack() {
-    RollDiceDto attackRollDice = RollDiceDto.builder().result(10).build();
-    RollDiceDto defenseRollDice = RollDiceDto.builder().result(5).build();
-    RollDiceDto damageRollDice = RollDiceDto.builder().result(10).build();
+    DiceDto attackRollDice = DiceDto.builder().result(10).build();
+    DiceDto defenseRollDice = DiceDto.builder().result(5).build();
+    DiceDto damageRollDice = DiceDto.builder().result(10).build();
 
     when(battleRepository.findByPlayerUsernameAndEndedAtNull(dto.getPlayerUsername())).thenReturn(Optional.of(battle));
     when(diceProvider.rollTurnDice()).thenReturn(attackRollDice, defenseRollDice);

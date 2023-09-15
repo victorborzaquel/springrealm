@@ -13,7 +13,7 @@ import com.victorborzaquel.springrealm.modules.battles.exceptions.NotAtThatStage
 import com.victorborzaquel.springrealm.modules.battles.exceptions.PlayerNotAlreadyInBattleException;
 import com.victorborzaquel.springrealm.modules.dices.DiceMapper;
 import com.victorborzaquel.springrealm.modules.dices.DiceProvider;
-import com.victorborzaquel.springrealm.modules.dices.dto.RollDiceDto;
+import com.victorborzaquel.springrealm.modules.dices.dto.DiceDto;
 import com.victorborzaquel.springrealm.modules.turns.TurnEntity;
 import com.victorborzaquel.springrealm.modules.turns.TurnRepository;
 
@@ -43,14 +43,14 @@ public class DefenseBattleUseCase {
     BattleCharacterEntity player = battle.getPlayerBattleCharacter();
     BattleCharacterEntity enemy = battle.getEnemyBattleCharacter();
 
-    RollDiceDto attackPowerDices = diceProvider.rollTurnDice();
+    DiceDto attackPowerDices = diceProvider.rollTurnDice();
     Integer attack = enemy.calculeAttack(attackPowerDices.getResult());
 
-    RollDiceDto defensePowerDices = diceProvider.rollTurnDice();
+    DiceDto defensePowerDices = diceProvider.rollTurnDice();
     Integer defense = player.calculeDefense(defensePowerDices.getResult());
 
     Integer damage = 0;
-    RollDiceDto damageDices = null;
+    DiceDto damageDices = null;
     if (attack > defense) {
       damageDices = diceProvider.rollDamageDice(enemy);
       damage = damageDices.getResult();

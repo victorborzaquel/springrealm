@@ -89,6 +89,10 @@ Para executar a API em sua máquina local, siga estas etapas:
 
 A API estará disponível em [http://localhost:9988](http://localhost:9988).
 
+## Entidades da API
+
+![](./.github/images/entities.png)
+
 ## Endpoints da API
 
 A API possui os seguintes endpoints:  
@@ -137,6 +141,10 @@ A API possui os seguintes endpoints:
 - **POST** `/initial`: Jogue os dados iniciais para ver quem começa a batalha.
 - **POST** `/attack`: Ataque um inimigo.
 - **POST** `/defense`: Defenda um ataque.
+
+### Dados (`/dices`)
+
+- **POST** `/roll`: Jogue um dado.
 
 ## Documentação Completa
 

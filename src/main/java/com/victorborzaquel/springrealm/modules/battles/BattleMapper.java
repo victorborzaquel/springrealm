@@ -13,7 +13,7 @@ import com.victorborzaquel.springrealm.modules.battles.dto.ResponseRollInitialDi
 import com.victorborzaquel.springrealm.modules.battles.dto.ResponseStartBattleDto;
 import com.victorborzaquel.springrealm.modules.characters.CharacterEntity;
 import com.victorborzaquel.springrealm.modules.dices.DiceMapper;
-import com.victorborzaquel.springrealm.modules.dices.dto.RollDiceDto;
+import com.victorborzaquel.springrealm.modules.dices.dto.DiceDto;
 import com.victorborzaquel.springrealm.modules.enemies.EnemyEntity;
 import com.victorborzaquel.springrealm.modules.players.PlayerEntity;
 import com.victorborzaquel.springrealm.modules.turns.TurnEntity;
@@ -46,8 +46,8 @@ public class BattleMapper {
         .build();
   }
 
-  public static ResponseRollInitialDiceDto toRollInitialDiceDto(Boolean isPlayerInitiative, RollDiceDto playerDice,
-      RollDiceDto enemyDice) {
+  public static ResponseRollInitialDiceDto toRollInitialDiceDto(Boolean isPlayerInitiative, DiceDto playerDice,
+      DiceDto enemyDice) {
     return ResponseRollInitialDiceDto.builder()
         .isDraw(isPlayerInitiative == null)
         .isPlayerInitiative(isPlayerInitiative)
